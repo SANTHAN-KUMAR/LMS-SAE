@@ -257,3 +257,397 @@ WHERE examination_artifacts.parsed_reg_no = $1::VARCHAR AND examination_artifact
 2025-12-02 22:40:50,240 - sqlalchemy.engine.Engine - INFO - [cached since 15.05s ago] ('212223240065', 'SUBMITTED_TO_LMS', 'COMPLETED')
 2025-12-02 22:40:50,242 - sqlalchemy.engine.Engine - INFO - COMMIT
 2025-12-02 22:40:50,245 - app.db.database - ERROR - Database session error: [{'type': 'missing', 'loc': ('header', 'X-Session-ID'), 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+2025-12-02 22:44:39,845 - app.main - INFO - Shutting down Examination Middleware...
+2025-12-02 22:44:39,845 - app.main - INFO - Database connections closed
+2025-12-02 22:44:41,368 - app.main - INFO - Starting Examination Middleware...
+2025-12-02 22:44:41,415 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-12-02 22:44:41,416 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:44:41,417 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-12-02 22:44:41,417 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:44:41,418 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-12-02 22:44:41,418 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:44:41,419 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:44:41,421 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,421 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] ('examination_artifacts', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,425 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,426 - sqlalchemy.engine.Engine - INFO - [cached since 0.004874s ago] ('subject_mappings', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,426 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,427 - sqlalchemy.engine.Engine - INFO - [cached since 0.005968s ago] ('staff_users', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,427 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,427 - sqlalchemy.engine.Engine - INFO - [cached since 0.006716s ago] ('student_sessions', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,428 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,428 - sqlalchemy.engine.Engine - INFO - [cached since 0.007478s ago] ('audit_logs', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,429 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,429 - sqlalchemy.engine.Engine - INFO - [cached since 0.008218s ago] ('submission_queue', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,429 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:44:41,430 - sqlalchemy.engine.Engine - INFO - [cached since 0.009082s ago] ('system_config', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:44:41,432 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = $1::VARCHAR AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != $2::VARCHAR
+2025-12-02 22:44:41,432 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] ('workflowstatus', 'pg_catalog')
+2025-12-02 22:44:41,433 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:44:41,439 - app.main - INFO - Database tables created/verified
+2025-12-02 22:44:41,440 - app.main - INFO - Upload directory: D:\Test SAE-2\exam_middleware\uploads
+2025-12-02 22:44:41,440 - app.main - INFO - Storage directory: D:\Test SAE-2\exam_middleware\storage
+2025-12-02 22:44:41,440 - app.main - INFO - Examination Middleware started successfully
+2025-12-02 22:46:35,853 - app.main - INFO - Starting Examination Middleware...
+2025-12-02 22:46:35,909 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-12-02 22:46:35,910 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:46:35,911 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-12-02 22:46:35,911 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:46:35,913 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-12-02 22:46:35,913 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-02 22:46:35,914 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:46:35,916 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,916 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] ('examination_artifacts', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,921 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,922 - sqlalchemy.engine.Engine - INFO - [cached since 0.005479s ago] ('subject_mappings', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,923 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,923 - sqlalchemy.engine.Engine - INFO - [cached since 0.006882s ago] ('staff_users', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,924 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,924 - sqlalchemy.engine.Engine - INFO - [cached since 0.007601s ago] ('student_sessions', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,925 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,925 - sqlalchemy.engine.Engine - INFO - [cached since 0.008556s ago] ('audit_logs', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,925 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,926 - sqlalchemy.engine.Engine - INFO - [cached since 0.0094s ago] ('submission_queue', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,926 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-02 22:46:35,927 - sqlalchemy.engine.Engine - INFO - [cached since 0.01031s ago] ('system_config', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-02 22:46:35,927 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = $1::VARCHAR AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != $2::VARCHAR
+2025-12-02 22:46:35,928 - sqlalchemy.engine.Engine - INFO - [generated in 0.00036s] ('workflowstatus', 'pg_catalog')
+2025-12-02 22:46:35,929 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:46:35,940 - app.main - INFO - Database tables created/verified
+2025-12-02 22:46:35,941 - app.main - INFO - Upload directory: D:\Test SAE-2\exam_middleware\uploads
+2025-12-02 22:46:35,941 - app.main - INFO - Storage directory: D:\Test SAE-2\exam_middleware\storage
+2025-12-02 22:46:35,941 - app.main - INFO - Examination Middleware started successfully
+2025-12-02 22:46:46,232 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-02 22:46:46,233 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-02 22:46:46,233 - multipart.multipart - DEBUG - Calling on_header_value with data[63:89]
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_part_data with data[93:98]
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-02 22:46:46,234 - multipart.multipart - DEBUG - Calling on_header_field with data[142:161]
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_header_value with data[163:189]
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_part_data with data[193:201]
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-02 22:46:46,235 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-02 22:46:46,317 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:46:46,330 - sqlalchemy.engine.Engine - INFO - SELECT staff_users.id, staff_users.username, staff_users.email, staff_users.hashed_password, staff_users.full_name, staff_users.role, staff_users.is_active, staff_users.created_at, staff_users.last_login_at 
+FROM staff_users 
+WHERE staff_users.username = $1::VARCHAR
+2025-12-02 22:46:46,331 - sqlalchemy.engine.Engine - INFO - [generated in 0.00071s] ('admin',)
+2025-12-02 22:46:46,577 - sqlalchemy.engine.Engine - INFO - UPDATE staff_users SET last_login_at=$1::TIMESTAMP WITH TIME ZONE WHERE staff_users.id = $2::INTEGER
+2025-12-02 22:46:46,578 - sqlalchemy.engine.Engine - INFO - [generated in 0.00095s] (datetime.datetime(2025, 12, 2, 17, 16, 46, 576242, tzinfo=datetime.timezone.utc), 1)
+2025-12-02 22:46:46,591 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:03,796 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_value with data[63:123]
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_field with data[125:137]
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_value with data[139:149]
+2025-12-02 22:47:03,797 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-02 22:47:03,798 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-02 22:47:03,798 - multipart.multipart - DEBUG - Calling on_part_data with data[153:254]
+2025-12-02 22:47:03,798 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,799 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,799 - multipart.multipart - DEBUG - Calling on_part_data with data[256:32768]
+2025-12-02 22:47:03,800 - multipart.multipart - DEBUG - Calling on_part_data with data[0:102991]
+2025-12-02 22:47:03,801 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,801 - multipart.multipart - DEBUG - Calling on_part_data with data[102992:111970]
+2025-12-02 22:47:03,801 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,802 - multipart.multipart - DEBUG - Calling on_part_data with data[111971:202837]
+2025-12-02 22:47:03,802 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,802 - multipart.multipart - DEBUG - Calling on_part_data with data[202838:262144]
+2025-12-02 22:47:03,803 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32443]
+2025-12-02 22:47:03,803 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,803 - multipart.multipart - DEBUG - Calling on_part_data with data[32444:42888]
+2025-12-02 22:47:03,803 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,804 - multipart.multipart - DEBUG - Calling on_part_data with data[42889:85350]
+2025-12-02 22:47:03,804 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,804 - multipart.multipart - DEBUG - Calling on_part_data with data[85351:184779]
+2025-12-02 22:47:03,804 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,805 - multipart.multipart - DEBUG - Calling on_part_data with data[184780:216956]
+2025-12-02 22:47:03,805 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,805 - multipart.multipart - DEBUG - Calling on_part_data with data[216957:262144]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[0:23803]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[23804:34926]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[34927:69260]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[69261:178829]
+2025-12-02 22:47:03,806 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,808 - multipart.multipart - DEBUG - Calling on_part_data with data[178830:262144]
+2025-12-02 22:47:03,809 - multipart.multipart - DEBUG - Calling on_part_data with data[0:79692]
+2025-12-02 22:47:03,809 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-02 22:47:03,809 - multipart.multipart - DEBUG - Calling on_part_data with data[79693:82325]
+2025-12-02 22:47:03,809 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-02 22:47:03,809 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-02 22:47:03,810 - multipart.multipart - DEBUG - Calling on_header_field with data[82369:82388]
+2025-12-02 22:47:03,810 - multipart.multipart - DEBUG - Calling on_header_value with data[82390:82420]
+2025-12-02 22:47:03,810 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-02 22:47:03,811 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-02 22:47:03,811 - multipart.multipart - DEBUG - Calling on_part_data with data[82424:82432]
+2025-12-02 22:47:03,811 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-02 22:47:03,811 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-02 22:47:03,876 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:03,878 - sqlalchemy.engine.Engine - INFO - SELECT staff_users.id, staff_users.username, staff_users.email, staff_users.hashed_password, staff_users.full_name, staff_users.role, staff_users.is_active, staff_users.created_at, staff_users.last_login_at 
+FROM staff_users 
+WHERE staff_users.id = $1::INTEGER
+2025-12-02 22:47:03,878 - sqlalchemy.engine.Engine - INFO - [generated in 0.00047s] (1,)
+2025-12-02 22:47:03,881 - app.services.file_processor - INFO - Parsed filename (strict): 212223240014, 19AI405
+2025-12-02 22:47:03,883 - app.services.file_processor - INFO - Saved file: ./uploads\pending\2bff77d3bebc476aa5c41721e44a94a2.jpg (hash: 3a00d46e79102899...)
+2025-12-02 22:47:03,886 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.transaction_id = $1::VARCHAR
+2025-12-02 22:47:03,886 - sqlalchemy.engine.Engine - INFO - [generated in 0.00045s] ('9f46692b458d128fc49cc4c8df7273d1',)
+2025-12-02 22:47:03,908 - sqlalchemy.engine.Engine - INFO - INSERT INTO examination_artifacts (artifact_uuid, raw_filename, original_filename, parsed_reg_no, parsed_subject_code, file_blob_path, file_hash, file_size_bytes, mime_type, moodle_user_id, moodle_username, moodle_course_id, moodle_assignment_id, workflow_status, moodle_draft_item_id, moodle_submission_id, lms_transaction_id, transaction_id, validated_at, submit_timestamp, completed_at, uploaded_by_staff_id, submitted_by_user_id, transaction_log, error_message, retry_count) VALUES ($1::UUID, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::BIGINT, $9::VARCHAR, $10::BIGINT, $11::VARCHAR, $12::INTEGER, $13::INTEGER, $14::workflowstatus, $15::BIGINT, $16::VARCHAR, $17::VARCHAR, $18::VARCHAR, $19::TIMESTAMP WITH TIME ZONE, $20::TIMESTAMP WITH TIME ZONE, $21::TIMESTAMP WITH TIME ZONE, $22::INTEGER, $23::BIGINT, $24::JSONB, $25::VARCHAR, $26::INTEGER) RETURNING examination_artifacts.id, examination_artifacts.uploaded_at
+2025-12-02 22:47:03,909 - sqlalchemy.engine.Engine - INFO - [generated in 0.00088s] (UUID('0ff3069a-b578-404c-ac60-95451bc7f55c'), '212223240014_19AI405.jpg', '212223240014_19AI405.jpg', '212223240014', '19AI405', './uploads\\pending\\2bff77d3bebc476aa5c41721e44a94a2.jpg', '3a00d46e791028994365d24a1febf50b451f2fee472cf57c44b1c37bb58275dd', 901372, 'image/jpeg', None, None, None, None, 'PENDING', None, None, None, '9f46692b458d128fc49cc4c8df7273d1', None, None, None, 1, None, '[{"timestamp": "2025-12-02T17:17:03.905796", "action": "created", "details": {"filename": "212223240014_19AI405.jpg", "parsed_reg_no": "212223240014", "parsed_subject_code": "19AI405"}}]', None, 0)
+2025-12-02 22:47:03,912 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.id = $1::INTEGER
+2025-12-02 22:47:03,913 - sqlalchemy.engine.Engine - INFO - [generated in 0.00068s] (18,)
+2025-12-02 22:47:03,914 - app.services.artifact_service - INFO - Created artifact: 0ff3069a-b578-404c-ac60-95451bc7f55c
+2025-12-02 22:47:03,915 - sqlalchemy.engine.Engine - INFO - INSERT INTO audit_logs (action, action_category, description, actor_type, actor_id, actor_username, actor_ip, artifact_id, target_type, target_id, request_data, response_data, moodle_api_function, moodle_response_code) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::INTEGER, $9::VARCHAR, $10::VARCHAR, $11::JSONB, $12::JSONB, $13::VARCHAR, $14::INTEGER) RETURNING audit_logs.id, audit_logs.created_at
+2025-12-02 22:47:03,916 - sqlalchemy.engine.Engine - INFO - [generated in 0.00051s] ('bulk_upload', 'upload', 'Bulk upload: 1 successful, 0 failed', 'staff', '1', 'admin', '127.0.0.1', None, None, None, '{"total": 1, "successful": 1, "failed": 0}', 'null', None, None)
+2025-12-02 22:47:03,917 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:13,164 - app.api.routes.auth - INFO - Authenticating student: student1
+2025-12-02 22:47:13,414 - app.services.moodle_client - INFO - Authenticating user: student1
+2025-12-02 22:47:13,414 - httpcore.connection - DEBUG - connect_tcp.started host='1844fdb23815.ngrok-free.app' port=443 local_address=None timeout=30.0 socket_options=None
+2025-12-02 22:47:13,603 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001C75116F2D0>
+2025-12-02 22:47:13,604 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001C7512EACC0> server_hostname='1844fdb23815.ngrok-free.app' timeout=30.0
+2025-12-02 22:47:13,666 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001C7511DE410>
+2025-12-02 22:47:13,668 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:13,668 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:13,669 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:13,669 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:13,669 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:14,178 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'no-store, no-cache, must-revalidate'), (b'Cache-Control', b'post-check=0, pre-check=0'), (b'Content-Length', b'126'), (b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Tue, 02 Dec 2025 17:17:13 GMT'), (b'Expires', b'Mon, 20 Aug 1969 09:23:00 GMT'), (b'Last-Modified', b'Tue, 02 Dec 2025 17:17:13 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4')])
+2025-12-02 22:47:14,179 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:14,179 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:14,179 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:14,180 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:14,180 - app.services.moodle_client - INFO - Successfully authenticated user: student1
+2025-12-02 22:47:14,180 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:14,182 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:14,182 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:14,182 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:14,182 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:14,406 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'private, must-revalidate, pre-check=0, post-check=0, max-age=0'), (b'Content-Type', b'application/json'), (b'Date', b'Tue, 02 Dec 2025 17:17:14 GMT'), (b'Expires', b'Thu, 01 Jan 1970 00:00:00 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4'), (b'Transfer-Encoding', b'chunked')])
+2025-12-02 22:47:14,406 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:14,461 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:14,461 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:14,462 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:14,462 - app.services.moodle_client - INFO - Got site info for user: student1
+2025-12-02 22:47:14,525 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:14,527 - sqlalchemy.engine.Engine - INFO - INSERT INTO student_sessions (session_id, moodle_user_id, moodle_username, moodle_fullname, encrypted_token, token_expires_at, ip_address, user_agent, expires_at) VALUES ($1::VARCHAR, $2::BIGINT, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::TIMESTAMP WITH TIME ZONE, $7::VARCHAR, $8::VARCHAR, $9::TIMESTAMP WITH TIME ZONE) RETURNING student_sessions.id, student_sessions.created_at, student_sessions.last_activity_at
+2025-12-02 22:47:14,528 - sqlalchemy.engine.Engine - INFO - [generated in 0.00061s] ('Zg1ktiEWhIQptjS6DpJL1oQaByvJxGx3wuZH2hX6gSs', 3, 'student1', 'student 212223240014', 'Z0FBQUFBQnBMeDhhM1VlZ1pPUzZreXVaRl9fZkZDeUhubGNPdC1mSGtQaFk5Z191aHd3LVJHV1dicFJpR3c2cWNoZTRVdUVfRFhNTzgyU1hJTUlKcU5zQWduZFFVYjl5bllTVUlWVlI3djU2cTQ0WFF3dzZUUk5fYnBydUVTZ1JPWk5GZGpLdzJMN3E=', None, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', datetime.datetime(2025, 12, 2, 18, 17, 14, 463609, tzinfo=datetime.timezone.utc))
+2025-12-02 22:47:14,530 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:14,587 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:14,588 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE (examination_artifacts.parsed_reg_no = $1::VARCHAR OR examination_artifacts.moodle_username = $2::VARCHAR) AND examination_artifacts.workflow_status IN ($3::workflowstatus, $4::workflowstatus, $5::workflowstatus, $6::workflowstatus) ORDER BY examination_artifacts.uploaded_at DESC
+2025-12-02 22:47:14,588 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] ('212223240014', '212223240014', 'PENDING', 'PENDING_REVIEW', 'VALIDATED', 'READY_FOR_REVIEW')
+2025-12-02 22:47:14,602 - app.api.routes.auth - INFO - Student student1 (reg: 212223240014) logged in. Pending papers: 1
+2025-12-02 22:47:14,602 - httpcore.connection - DEBUG - close.started
+2025-12-02 22:47:14,602 - httpcore.connection - DEBUG - close.complete
+2025-12-02 22:47:14,603 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:14,669 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:14,671 - sqlalchemy.engine.Engine - INFO - SELECT student_sessions.id, student_sessions.session_id, student_sessions.moodle_user_id, student_sessions.moodle_username, student_sessions.moodle_fullname, student_sessions.encrypted_token, student_sessions.token_expires_at, student_sessions.ip_address, student_sessions.user_agent, student_sessions.created_at, student_sessions.last_activity_at, student_sessions.expires_at 
+FROM student_sessions 
+WHERE student_sessions.session_id = $1::VARCHAR
+2025-12-02 22:47:14,672 - sqlalchemy.engine.Engine - INFO - [generated in 0.00044s] ('Zg1ktiEWhIQptjS6DpJL1oQaByvJxGx3wuZH2hX6gSs',)
+2025-12-02 22:47:14,675 - sqlalchemy.engine.Engine - INFO - UPDATE student_sessions SET last_activity_at=$1::TIMESTAMP WITH TIME ZONE WHERE student_sessions.id = $2::INTEGER
+2025-12-02 22:47:14,675 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] (datetime.datetime(2025, 12, 2, 17, 17, 14, 674005, tzinfo=datetime.timezone.utc), 20)
+2025-12-02 22:47:14,676 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:14,745 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:14,746 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE (examination_artifacts.parsed_reg_no = $1::VARCHAR OR examination_artifacts.moodle_username = $2::VARCHAR) AND examination_artifacts.workflow_status IN ($3::workflowstatus, $4::workflowstatus, $5::workflowstatus, $6::workflowstatus) ORDER BY examination_artifacts.uploaded_at DESC
+2025-12-02 22:47:14,746 - sqlalchemy.engine.Engine - INFO - [cached since 0.1585s ago] ('212223240014', '212223240014', 'PENDING', 'PENDING_REVIEW', 'VALIDATED', 'READY_FOR_REVIEW')
+2025-12-02 22:47:14,759 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.parsed_reg_no = $1::VARCHAR AND examination_artifacts.workflow_status IN ($2::workflowstatus, $3::workflowstatus) ORDER BY examination_artifacts.submit_timestamp DESC
+2025-12-02 22:47:14,760 - sqlalchemy.engine.Engine - INFO - [generated in 0.00057s] ('212223240014', 'SUBMITTED_TO_LMS', 'COMPLETED')
+2025-12-02 22:47:14,761 - sqlalchemy.engine.Engine - INFO - SELECT subject_mappings.id, subject_mappings.subject_code, subject_mappings.subject_name, subject_mappings.moodle_course_id, subject_mappings.moodle_course_idnumber, subject_mappings.moodle_assignment_id, subject_mappings.moodle_assignment_name, subject_mappings.exam_session, subject_mappings.is_active, subject_mappings.created_at, subject_mappings.updated_at, subject_mappings.last_verified_at 
+FROM subject_mappings 
+WHERE subject_mappings.subject_code = $1::VARCHAR AND subject_mappings.is_active = true
+2025-12-02 22:47:14,762 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] ('19AI405',)
+2025-12-02 22:47:14,763 - sqlalchemy.engine.Engine - INFO - SELECT subject_mappings.id, subject_mappings.subject_code, subject_mappings.subject_name, subject_mappings.moodle_course_id, subject_mappings.moodle_course_idnumber, subject_mappings.moodle_assignment_id, subject_mappings.moodle_assignment_name, subject_mappings.exam_session, subject_mappings.is_active, subject_mappings.created_at, subject_mappings.updated_at, subject_mappings.last_verified_at 
+FROM subject_mappings 
+WHERE subject_mappings.subject_code = $1::VARCHAR AND subject_mappings.is_active = true
+2025-12-02 22:47:14,764 - sqlalchemy.engine.Engine - INFO - [cached since 0.002746s ago] ('19AI405',)
+2025-12-02 22:47:14,765 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:14,768 - app.db.database - ERROR - Database session error: [{'type': 'missing', 'loc': ('header', 'X-Session-ID'), 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+2025-12-02 22:47:24,742 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:24,742 - sqlalchemy.engine.Engine - INFO - SELECT student_sessions.id, student_sessions.session_id, student_sessions.moodle_user_id, student_sessions.moodle_username, student_sessions.moodle_fullname, student_sessions.encrypted_token, student_sessions.token_expires_at, student_sessions.ip_address, student_sessions.user_agent, student_sessions.created_at, student_sessions.last_activity_at, student_sessions.expires_at 
+FROM student_sessions 
+WHERE student_sessions.session_id = $1::VARCHAR
+2025-12-02 22:47:24,744 - sqlalchemy.engine.Engine - INFO - [cached since 10.07s ago] ('Zg1ktiEWhIQptjS6DpJL1oQaByvJxGx3wuZH2hX6gSs',)
+2025-12-02 22:47:24,746 - sqlalchemy.engine.Engine - INFO - UPDATE student_sessions SET last_activity_at=$1::TIMESTAMP WITH TIME ZONE WHERE student_sessions.id = $2::INTEGER
+2025-12-02 22:47:24,746 - sqlalchemy.engine.Engine - INFO - [cached since 10.07s ago] (datetime.datetime(2025, 12, 2, 17, 17, 24, 746557, tzinfo=datetime.timezone.utc), 20)
+2025-12-02 22:47:24,747 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:24,805 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:24,806 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.artifact_uuid = $1::UUID
+2025-12-02 22:47:24,806 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] ('0ff3069a-b578-404c-ac60-95451bc7f55c',)
+2025-12-02 22:47:24,818 - sqlalchemy.engine.Engine - INFO - SELECT subject_mappings.id, subject_mappings.subject_code, subject_mappings.subject_name, subject_mappings.moodle_course_id, subject_mappings.moodle_course_idnumber, subject_mappings.moodle_assignment_id, subject_mappings.moodle_assignment_name, subject_mappings.exam_session, subject_mappings.is_active, subject_mappings.created_at, subject_mappings.updated_at, subject_mappings.last_verified_at 
+FROM subject_mappings 
+WHERE subject_mappings.subject_code = $1::VARCHAR AND subject_mappings.is_active = true
+2025-12-02 22:47:24,819 - sqlalchemy.engine.Engine - INFO - [cached since 10.06s ago] ('19AI405',)
+2025-12-02 22:47:24,823 - sqlalchemy.engine.Engine - INFO - UPDATE examination_artifacts SET moodle_user_id=$1::BIGINT, moodle_username=$2::VARCHAR, moodle_assignment_id=$3::INTEGER WHERE examination_artifacts.id = $4::INTEGER
+2025-12-02 22:47:24,823 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] (3, 'student1', 2, 18)
+2025-12-02 22:47:24,824 - sqlalchemy.engine.Engine - INFO - INSERT INTO audit_logs (action, action_category, description, actor_type, actor_id, actor_username, actor_ip, artifact_id, target_type, target_id, request_data, response_data, moodle_api_function, moodle_response_code) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::INTEGER, $9::VARCHAR, $10::VARCHAR, $11::JSONB, $12::JSONB, $13::VARCHAR, $14::INTEGER) RETURNING audit_logs.id, audit_logs.created_at
+2025-12-02 22:47:24,824 - sqlalchemy.engine.Engine - INFO - [cached since 20.91s ago] ('submission_started', 'submit', 'Starting submission for assignment 2', 'student', '3', 'student1', '127.0.0.1', 18, None, None, 'null', 'null', None, None)
+2025-12-02 22:47:24,827 - app.services.submission_service - INFO - Step 1/3: Uploading file to draft area
+2025-12-02 22:47:24,828 - sqlalchemy.engine.Engine - INFO - UPDATE examination_artifacts SET workflow_status=$1::workflowstatus WHERE examination_artifacts.id = $2::INTEGER
+2025-12-02 22:47:24,828 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] ('UPLOADING', 18)
+2025-12-02 22:47:25,087 - app.services.moodle_client - INFO - Uploading file: 212223240014_19AI405.jpg (901372 bytes)
+2025-12-02 22:47:25,087 - httpcore.connection - DEBUG - connect_tcp.started host='1844fdb23815.ngrok-free.app' port=443 local_address=None timeout=30.0 socket_options=None
+2025-12-02 22:47:25,145 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001C7513A0F50>
+2025-12-02 22:47:25,146 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001C7512EB020> server_hostname='1844fdb23815.ngrok-free.app' timeout=30.0
+2025-12-02 22:47:25,233 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001C75115E390>
+2025-12-02 22:47:25,233 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:25,234 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:25,234 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:27,065 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:27,066 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:38,570 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'no-store, no-cache, must-revalidate'), (b'Cache-Control', b'post-check=0, pre-check=0'), (b'Content-Length', b'294'), (b'Content-Type', b'text/plain; charset=utf-8'), (b'Date', b'Tue, 02 Dec 2025 17:17:25 GMT'), (b'Expires', b'Mon, 20 Aug 1969 09:23:00 GMT'), (b'Last-Modified', b'Tue, 02 Dec 2025 17:17:38 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4')])
+2025-12-02 22:47:38,570 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:38,570 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:38,570 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:38,570 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:38,571 - app.services.moodle_client - INFO - Upload response: [{'component': 'user', 'contextid': 17, 'userid': '3', 'filearea': 'draft', 'filename': '212223240014_19AI405.jpg', 'filepath': '/', 'itemid': 394725041, 'license': 'unknown', 'author': 'student 212223240014', 'source': 'O:8:"stdClass":1:{s:6:"source";s:24:"212223240014_19AI405.jpg";}', 'filesize': 901372}]
+2025-12-02 22:47:38,571 - app.services.moodle_client - INFO - File uploaded successfully. Item ID: 394725041
+2025-12-02 22:47:38,571 - sqlalchemy.engine.Engine - INFO - UPDATE examination_artifacts SET moodle_draft_item_id=$1::BIGINT WHERE examination_artifacts.id = $2::INTEGER
+2025-12-02 22:47:38,571 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] (394725041, 18)
+2025-12-02 22:47:38,573 - app.services.submission_service - INFO - Verifying assignment 2 exists and is accessible...
+2025-12-02 22:47:38,574 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:38,574 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:38,574 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:38,574 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:38,574 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:38,799 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'private, must-revalidate, pre-check=0, post-check=0, max-age=0'), (b'Content-Length', b'662'), (b'Content-Type', b'application/json'), (b'Date', b'Tue, 02 Dec 2025 17:17:38 GMT'), (b'Expires', b'Thu, 01 Jan 1970 00:00:00 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4')])
+2025-12-02 22:47:38,799 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:38,800 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:38,800 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:38,800 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:38,801 - app.services.submission_service - INFO - Assignment 2 verified and accessible
+2025-12-02 22:47:38,801 - app.services.submission_service - INFO - Step 2/3: Linking draft to assignment
+2025-12-02 22:47:38,802 - sqlalchemy.engine.Engine - INFO - UPDATE examination_artifacts SET workflow_status=$1::workflowstatus WHERE examination_artifacts.id = $2::INTEGER
+2025-12-02 22:47:38,802 - sqlalchemy.engine.Engine - INFO - [cached since 13.98s ago] ('SUBMITTING', 18)
+2025-12-02 22:47:38,803 - app.services.moodle_client - INFO - Saving submission for assignment 2 with item 394725041
+2025-12-02 22:47:38,804 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:38,804 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:38,804 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:38,805 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:38,805 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:39,114 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'private, must-revalidate, pre-check=0, post-check=0, max-age=0'), (b'Content-Length', b'2'), (b'Content-Type', b'application/json'), (b'Date', b'Tue, 02 Dec 2025 17:17:38 GMT'), (b'Expires', b'Thu, 01 Jan 1970 00:00:00 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4')])
+2025-12-02 22:47:39,115 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:39,116 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:39,117 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:39,117 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:39,118 - app.services.moodle_client - INFO - mod_assign_save_submission response: []
+2025-12-02 22:47:39,119 - app.services.moodle_client - INFO - Submission saved successfully for assignment 2
+2025-12-02 22:47:39,119 - app.services.submission_service - INFO - Verifying submission status after save...
+2025-12-02 22:47:39,120 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:39,121 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-02 22:47:39,121 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-02 22:47:39,122 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-02 22:47:39,122 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-02 22:47:39,278 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Accept-Ranges', b'none'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'private, must-revalidate, pre-check=0, post-check=0, max-age=0'), (b'Content-Length', b'986'), (b'Content-Type', b'application/json'), (b'Date', b'Tue, 02 Dec 2025 17:17:39 GMT'), (b'Expires', b'Thu, 01 Jan 1970 00:00:00 GMT'), (b'Ngrok-Agent-Ips', b'2401:4900:9157:667e:99c1:3a88:6025:b680'), (b'Pragma', b'no-cache'), (b'Server', b'Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4'), (b'X-Powered-By', b'PHP/8.2.4')])
+2025-12-02 22:47:39,279 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-02 22:47:39,279 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-02 22:47:39,279 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-02 22:47:39,279 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-02 22:47:39,279 - app.services.submission_service - INFO - Full submission status response: {'lastattempt': {'submission': {'id': 9, 'userid': 3, 'attemptnumber': 0, 'timecreated': 1764694261, 'timemodified': 1764695858, 'timestarted': None, 'status': 'submitted', 'groupid': 0, 'assignment': 2, 'latest': 1, 'plugins': [{'type': 'file', 'name': 'File submissions', 'fileareas': [{'area': 'submission_files', 'files': [{'filename': '212223240014_19AI405.jpg', 'filepath': '/', 'filesize': 1268488, 'fileurl': 'https://1844fdb23815.ngrok-free.app/webservice/pluginfile.php/26/assignsubmission_file/submission_files/9/212223240014_19AI405.jpg', 'timemodified': 1764695858, 'mimetype': 'image/jpeg', 'isexternalfile': False, 'icon': 'f/image'}]}]}, {'type': 'comments', 'name': 'Submission comments'}]}, 'submissiongroupmemberswhoneedtosubmit': [], 'submissionsenabled': True, 'locked': False, 'graded': False, 'canedit': True, 'caneditowner': True, 'cansubmit': False, 'extensionduedate': None, 'timelimit': 0, 'blindmarking': False, 'gradingstatus': 'notgraded', 'usergroups': []}, 'assignmentdata': {'attachments': {'intro': []}}, 'warnings': []}
+2025-12-02 22:47:39,279 - app.services.submission_service - INFO - Submission status: submitted
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Submission ID: 9
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Submission timecreated: 1764694261
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Submission timemodified: 1764695858
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Grading status: notgraded
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Submissions enabled: True
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Can edit: True
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Can submit: False
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Submission verification - Files found: 1
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Verified files: ['212223240014_19AI405.jpg']
+2025-12-02 22:47:39,280 - app.services.submission_service - INFO - Skipping explicit submit_for_grading call because Moodle reports cansubmit=False. Treating current 'submitted' state as final.
+2025-12-02 22:47:39,281 - httpcore.connection - DEBUG - close.started
+2025-12-02 22:47:39,281 - httpcore.connection - DEBUG - close.complete
+2025-12-02 22:47:39,281 - app.services.submission_service - INFO - Submission result: {'assignment_id': 2, 'steps_completed': ['upload', 'save'], 'item_id': 394725041, 'save_result': {'success': True, 'warnings': []}, 'submission_status': 'submitted', 'submission_id': '9', 'verified_files': ['212223240014_19AI405.jpg'], 'submit_skipped': True, 'success': True, 'transaction_id': 'TXN_0ff3069a-b578-404c-ac60-95451bc7f55c_20251202171739'}
+2025-12-02 22:47:39,281 - app.services.submission_service - INFO - Steps completed: ['upload', 'save']
+2025-12-02 22:47:39,282 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.id = $1::INTEGER
+2025-12-02 22:47:39,282 - sqlalchemy.engine.Engine - INFO - [generated in 0.00047s] (18,)
+2025-12-02 22:47:39,285 - sqlalchemy.engine.Engine - INFO - UPDATE examination_artifacts SET workflow_status=$1::workflowstatus, moodle_submission_id=$2::VARCHAR, lms_transaction_id=$3::VARCHAR, submit_timestamp=$4::TIMESTAMP WITH TIME ZONE, completed_at=$5::TIMESTAMP WITH TIME ZONE WHERE examination_artifacts.id = $6::INTEGER
+2025-12-02 22:47:39,285 - sqlalchemy.engine.Engine - INFO - [generated in 0.00028s] ('COMPLETED', '9', 'TXN_0ff3069a-b578-404c-ac60-95451bc7f55c_20251202171739', datetime.datetime(2025, 12, 2, 17, 17, 39, 284552), datetime.datetime(2025, 12, 2, 17, 17, 39, 284552), 18)
+2025-12-02 22:47:39,287 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.id = $1::INTEGER
+2025-12-02 22:47:39,287 - sqlalchemy.engine.Engine - INFO - [cached since 35.38s ago] (18,)
+2025-12-02 22:47:39,288 - app.services.artifact_service - INFO - Artifact 18 marked as submitted
+2025-12-02 22:47:39,289 - sqlalchemy.engine.Engine - INFO - INSERT INTO audit_logs (action, action_category, description, actor_type, actor_id, actor_username, actor_ip, artifact_id, target_type, target_id, request_data, response_data, moodle_api_function, moodle_response_code) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::INTEGER, $9::VARCHAR, $10::VARCHAR, $11::JSONB, $12::JSONB, $13::VARCHAR, $14::INTEGER) RETURNING audit_logs.id, audit_logs.created_at
+2025-12-02 22:47:39,289 - sqlalchemy.engine.Engine - INFO - [cached since 35.38s ago] ('submission_completed', 'submit', 'Submission completed successfully', 'student', '3', 'student1', '127.0.0.1', 18, None, None, 'null', '{"assignment_id": 2, "steps_completed": ["upload", "save"], "item_id": 394725041, "save_result": {"success": true, "warnings": []}, "submission_statu ... (55 characters truncated) ... : ["212223240014_19AI405.jpg"], "submit_skipped": true, "success": true, "transaction_id": "TXN_0ff3069a-b578-404c-ac60-95451bc7f55c_20251202171739"}', None, None)
+2025-12-02 22:47:39,290 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:39,450 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:39,451 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.artifact_uuid = $1::UUID
+2025-12-02 22:47:39,451 - sqlalchemy.engine.Engine - INFO - [cached since 14.65s ago] ('0ff3069a-b578-404c-ac60-95451bc7f55c',)
+2025-12-02 22:47:39,465 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:39,618 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:39,618 - sqlalchemy.engine.Engine - INFO - SELECT student_sessions.id, student_sessions.session_id, student_sessions.moodle_user_id, student_sessions.moodle_username, student_sessions.moodle_fullname, student_sessions.encrypted_token, student_sessions.token_expires_at, student_sessions.ip_address, student_sessions.user_agent, student_sessions.created_at, student_sessions.last_activity_at, student_sessions.expires_at 
+FROM student_sessions 
+WHERE student_sessions.session_id = $1::VARCHAR
+2025-12-02 22:47:39,618 - sqlalchemy.engine.Engine - INFO - [cached since 24.95s ago] ('Zg1ktiEWhIQptjS6DpJL1oQaByvJxGx3wuZH2hX6gSs',)
+2025-12-02 22:47:39,621 - sqlalchemy.engine.Engine - INFO - UPDATE student_sessions SET last_activity_at=$1::TIMESTAMP WITH TIME ZONE WHERE student_sessions.id = $2::INTEGER
+2025-12-02 22:47:39,622 - sqlalchemy.engine.Engine - INFO - [cached since 24.95s ago] (datetime.datetime(2025, 12, 2, 17, 17, 39, 621467, tzinfo=datetime.timezone.utc), 20)
+2025-12-02 22:47:39,623 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:39,835 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-02 22:47:39,836 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE (examination_artifacts.parsed_reg_no = $1::VARCHAR OR examination_artifacts.moodle_username = $2::VARCHAR) AND examination_artifacts.workflow_status IN ($3::workflowstatus, $4::workflowstatus, $5::workflowstatus, $6::workflowstatus) ORDER BY examination_artifacts.uploaded_at DESC
+2025-12-02 22:47:39,837 - sqlalchemy.engine.Engine - INFO - [cached since 25.25s ago] ('212223240014', '212223240014', 'PENDING', 'PENDING_REVIEW', 'VALIDATED', 'READY_FOR_REVIEW')
+2025-12-02 22:47:39,859 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.parsed_reg_no = $1::VARCHAR AND examination_artifacts.workflow_status IN ($2::workflowstatus, $3::workflowstatus) ORDER BY examination_artifacts.submit_timestamp DESC
+2025-12-02 22:47:39,860 - sqlalchemy.engine.Engine - INFO - [cached since 25.1s ago] ('212223240014', 'SUBMITTED_TO_LMS', 'COMPLETED')
+2025-12-02 22:47:39,862 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-02 22:47:39,866 - app.db.database - ERROR - Database session error: [{'type': 'missing', 'loc': ('header', 'X-Session-ID'), 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+2025-12-02 22:51:43,043 - app.main - INFO - Shutting down Examination Middleware...
+2025-12-02 22:51:43,043 - app.main - INFO - Database connections closed
