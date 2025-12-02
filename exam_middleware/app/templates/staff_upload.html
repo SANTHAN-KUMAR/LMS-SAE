@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Examination Middleware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #059669;
+            --danger-color: #dc2626;
+            --warning-color: #d97706;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            padding: 2rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 16px 16px 0 0 !important;
+            padding: 1.5rem;
+        }
+        
+        .login-card {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .upload-zone {
+            border: 3px dashed #ccc;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #f8f9fa;
+        }
+        
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary-color);
+            background: #e8f0fe;
+        }
+        
+        .upload-zone i {
+            font-size: 4rem;
+            color: #6c757d;
+        }
+        
+        .upload-zone.dragover i {
+            color: var(--primary-color);
+        }
+        
+        .file-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .file-item.valid {
+            background: #d1fae5;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .file-item.invalid {
+            background: #fee2e2;
+            border-left: 4px solid var(--danger-color);
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .file-info i {
+            font-size: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .stats-card {
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .stats-card.total { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .stats-card.valid { background: linear-gradient(135deg, #10b981, #059669); }
+        .stats-card.invalid { background: linear-gradient(135deg, #f43f5e, #dc2626); }
+        .stats-card.uploaded { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .progress-container {
+            display: none;
+        }
+        
+        .progress-container.active {
+            display: block;
+        }
+        
+        .alert {
+            border-radius: 12px;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #loginSection, #uploadSection {
+            display: none;
+        }
+        
+        #loginSection.active, #uploadSection.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-file-earmark-text me-2"></i>
+                Examination Middleware
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3" id="userInfo" style="display: none;">
+                    <i class="bi bi-person-circle me-1"></i>
+                    <span id="userName"></span>
+                </span>
+                <button class="btn btn-outline-danger btn-sm" id="logoutBtn" style="display: none;" onclick="logout()">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Login Section -->
+        <div id="loginSection" class="active">
+            <div class="card login-card">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-shield-lock me-2"></i>
+                        Staff Login
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="username" required placeholder="Enter username">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                <input type="password" class="form-control" id="password" required placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div id="uploadSection">
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="stats-card total">
+                        <div class="stats-number" id="totalFiles">0</div>
+                        <div>Total Files</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card valid">
+                        <div class="stats-number" id="validFiles">0</div>
+                        <div>Valid Files</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card invalid">
+                        <div class="stats-number" id="invalidFiles">0</div>
+                        <div>Invalid Files</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card uploaded">
+                        <div class="stats-number" id="uploadedFiles">0</div>
+                        <div>Uploaded</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-cloud-upload me-2"></i>
+                        Upload Examination Papers
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info mb-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Filename Format:</strong> <code>{RegisterNumber}_{SubjectCode}.{pdf|jpg|jpeg|png}</code>
+                        <br>
+                        <small>Example: <code>611221104088_19AI405.pdf</code></small>
+                    </div>
+
+                    <div class="upload-zone" id="uploadZone">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                        <h5 class="mt-3">Drag & Drop Files Here</h5>
+                        <p class="text-muted">or click to browse</p>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                    </div>
+
+                    <div class="progress-container mt-4" id="progressContainer">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Uploading...</span>
+                            <span id="progressText">0%</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="file-list mt-4" id="fileList"></div>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button class="btn btn-primary flex-grow-1" id="uploadBtn" disabled onclick="uploadFiles()">
+                            <i class="bi bi-cloud-upload me-2"></i>
+                            Upload Valid Files
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="clearFiles()">
+                            <i class="bi bi-trash me-2"></i>
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Results -->
+            <div class="card mt-4" id="resultsCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-list-check me-2"></i>
+                        Upload Results
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="uploadResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // State
+        let authToken = null;
+        let selectedFiles = [];
+        let validatedFiles = [];
+        
+        // Filename pattern
+        const FILENAME_PATTERN = /^(\d{12})_([A-Z0-9]{2,10})\.(pdf|jpg|jpeg|png)$/i;
+        
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const uploadSection = document.getElementById('uploadSection');
+        const loginForm = document.getElementById('loginForm');
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Check for existing session
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('authToken');
+            const user = localStorage.getItem('userName');
+            if (token && user) {
+                authToken = token;
+                showUploadSection(user);
+            }
+        });
+        
+        // Login form handler
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+                
+                const response = await fetch('/auth/staff/login', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.access_token) {
+                    authToken = data.access_token;
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('userName', username);
+                    showUploadSection(username);
+                } else {
+                    showLoginError(data.detail || 'Login failed');
+                }
+            } catch (error) {
+                showLoginError('Connection error. Please try again.');
+            }
+        });
+        
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        function showUploadSection(user) {
+            loginSection.classList.remove('active');
+            uploadSection.classList.add('active');
+            userInfo.style.display = 'block';
+            userName.textContent = user;
+            logoutBtn.style.display = 'block';
+        }
+        
+        function logout() {
+            authToken = null;
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userName');
+            uploadSection.classList.remove('active');
+            loginSection.classList.add('active');
+            userInfo.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            clearFiles();
+        }
+        
+        // File upload zone handlers
+        uploadZone.addEventListener('click', () => fileInput.click());
+        
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+        
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+        
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+        
+        function handleFiles(files) {
+            for (const file of files) {
+                const validation = validateFilename(file.name);
+                const fileObj = {
+                    file: file,
+                    name: file.name,
+                    size: formatFileSize(file.size),
+                    valid: validation.valid,
+                    registerNumber: validation.registerNumber,
+                    subjectCode: validation.subjectCode,
+                    error: validation.error
+                };
+                selectedFiles.push(fileObj);
+            }
+            renderFileList();
+            updateStats();
+        }
+        
+        function validateFilename(filename) {
+            const match = filename.match(FILENAME_PATTERN);
+            if (match) {
+                return {
+                    valid: true,
+                    registerNumber: match[1],
+                    subjectCode: match[2].toUpperCase()
+                };
+            }
+            return {
+                valid: false,
+                error: 'Invalid filename format. Expected: {12-digit RegNo}_{SubjectCode}.{pdf|jpg|jpeg|png}'
+            };
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function renderFileList() {
+            fileList.innerHTML = selectedFiles.map((f, index) => `
+                <div class="file-item ${f.valid ? 'valid' : 'invalid'}">
+                    <div class="file-info">
+                        <i class="bi ${f.valid ? 'bi-file-earmark-check text-success' : 'bi-file-earmark-x text-danger'}"></i>
+                        <div>
+                            <strong>${f.name}</strong>
+                            <br>
+                            <small class="text-muted">${f.size}</small>
+                            ${f.valid ? `<br><small class="text-success">Reg: ${f.registerNumber} | Subject: ${f.subjectCode}</small>` : `<br><small class="text-danger">${f.error}</small>`}
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function updateStats() {
+            const total = selectedFiles.length;
+            const valid = selectedFiles.filter(f => f.valid).length;
+            const invalid = total - valid;
+            
+            document.getElementById('totalFiles').textContent = total;
+            document.getElementById('validFiles').textContent = valid;
+            document.getElementById('invalidFiles').textContent = invalid;
+            
+            uploadBtn.disabled = valid === 0;
+            validatedFiles = selectedFiles.filter(f => f.valid);
+        }
+        
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+            updateStats();
+        }
+        
+        function clearFiles() {
+            selectedFiles = [];
+            validatedFiles = [];
+            fileList.innerHTML = '';
+            updateStats();
+            document.getElementById('resultsCard').style.display = 'none';
+        }
+        
+        async function uploadFiles() {
+            if (validatedFiles.length === 0) return;
+            
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const resultsCard = document.getElementById('resultsCard');
+            const uploadResults = document.getElementById('uploadResults');
+            
+            progressContainer.classList.add('active');
+            uploadBtn.disabled = true;
+            
+            const formData = new FormData();
+            validatedFiles.forEach(f => {
+                formData.append('files', f.file);
+            });
+            formData.append('exam_session', new Date().toISOString().split('T')[0].replace(/-/g, ''));
+            
+            try {
+                const response = await fetch('/upload/bulk', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                progressBar.style.width = '100%';
+                progressText.textContent = '100%';
+                
+                if (response.ok) {
+                    document.getElementById('uploadedFiles').textContent = data.successful || 0;
+                    
+                    let resultsHtml = `
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Successfully uploaded ${data.successful} of ${data.total_files} files
+                        </div>
+                    `;
+                    
+                    if (data.results && data.results.length > 0) {
+                        resultsHtml += '<div class="list-group">';
+                        data.results.forEach(r => {
+                            const icon = r.success ? 'bi-check-circle text-success' : 'bi-x-circle text-danger';
+                            resultsHtml += `
+                                <div class="list-group-item">
+                                    <i class="${icon} me-2"></i>
+                                    <strong>${r.filename}</strong>
+                                    ${r.success ? '<span class="badge bg-success ms-2">Uploaded</span>' : `<span class="badge bg-danger ms-2">Failed: ${r.error}</span>`}
+                                </div>
+                            `;
+                        });
+                        resultsHtml += '</div>';
+                    }
+                    
+                    uploadResults.innerHTML = resultsHtml;
+                } else {
+                    uploadResults.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Upload failed: ${data.detail || 'Unknown error'}
+                        </div>
+                    `;
+                }
+                
+                resultsCard.style.display = 'block';
+            } catch (error) {
+                uploadResults.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Connection error: ${error.message}
+                    </div>
+                `;
+                resultsCard.style.display = 'block';
+            } finally {
+                setTimeout(() => {
+                    progressContainer.classList.remove('active');
+                    uploadBtn.disabled = false;
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

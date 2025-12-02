@@ -1,0 +1,220 @@
+/* Common styles for Examination Middleware */
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --success-color: #059669;
+    --danger-color: #dc2626;
+    --warning-color: #d97706;
+    --info-color: #0284c7;
+}
+
+/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* Card styles */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 16px 16px 0 0 !important;
+    padding: 1.5rem;
+}
+
+/* Button styles */
+.btn-gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
+    color: white;
+}
+
+.btn-gradient-success {
+    background: linear-gradient(135deg, var(--success-color), #047857);
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(5, 150, 105, 0.4);
+    color: white;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #e5e7eb;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Status badges */
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-submitted {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge-failed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-processing {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+/* Alert styles */
+.alert {
+    border-radius: 12px;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* File upload zone */
+.upload-zone {
+    border: 3px dashed #ccc;
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #f8f9fa;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+    border-color: var(--primary-color);
+    background: #e8f0fe;
+}
+
+.upload-zone i {
+    font-size: 4rem;
+    color: #6c757d;
+}
+
+.upload-zone.dragover i {
+    color: var(--primary-color);
+}
+
+/* Stats cards */
+.stats-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.stats-card .stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.stats-card.total {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.stats-card.valid,
+.stats-card.success {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.stats-card.invalid,
+.stats-card.failed {
+    background: linear-gradient(135deg, #f43f5e, #dc2626);
+}
+
+.stats-card.pending {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.stats-card.info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* File list items */
+.file-item {
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: #f8f9fa;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-item.valid {
+    background: #d1fae5;
+    border-left: 4px solid var(--success-color);
+}
+
+.file-item.invalid {
+    background: #fee2e2;
+    border-left: 4px solid var(--danger-color);
+}
+
+/* Table styles */
+.table-modern {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-modern thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.table-modern tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-card .stats-number {
+        font-size: 1.75rem;
+    }
+    
+    .upload-zone {
+        padding: 2rem;
+    }
+    
+    .upload-zone i {
+        font-size: 3rem;
+    }
+}

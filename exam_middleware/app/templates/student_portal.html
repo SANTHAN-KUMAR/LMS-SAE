@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Examination Middleware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #047857;
+            --accent-color: #10b981;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            padding: 2rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .login-card {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .paper-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .paper-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .paper-preview {
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .paper-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .paper-preview .pdf-icon {
+            font-size: 5rem;
+            color: #dc2626;
+        }
+        
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-submitted { background: #d1fae5; color: #065f46; }
+        .status-failed { background: #fee2e2; color: #991b1b; }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(5, 150, 105, 0.4);
+            color: white;
+        }
+        
+        .btn-submit:disabled {
+            background: #9ca3af;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .welcome-banner {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .welcome-banner h2 {
+            color: var(--primary-color);
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-item {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-item.total { background: #ede9fe; color: #5b21b6; }
+        .stat-item.pending { background: #fef3c7; color: #92400e; }
+        .stat-item.submitted { background: #d1fae5; color: #065f46; }
+        
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .empty-state i {
+            font-size: 5rem;
+            color: #9ca3af;
+        }
+        
+        #loginSection, #dashboardSection {
+            display: none;
+        }
+        
+        #loginSection.active, #dashboardSection.active {
+            display: block;
+        }
+        
+        .moodle-info {
+            background: #ecfdf5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .moodle-info small {
+            color: #065f46;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e5e7eb;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="mt-3 text-muted">Processing...</p>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-mortarboard me-2 text-success"></i>
+                Student Portal
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3" id="userInfo" style="display: none;">
+                    <i class="bi bi-person-circle me-1"></i>
+                    <span id="userName"></span>
+                </span>
+                <button class="btn btn-outline-danger btn-sm" id="logoutBtn" style="display: none;" onclick="logout()">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Login Section -->
+        <div id="loginSection" class="active">
+            <div class="card login-card">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-mortarboard me-2"></i>
+                        Student Login
+                    </h4>
+                    <small class="opacity-75">Login with your Moodle credentials</small>
+                </div>
+                <div class="card-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Moodle Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="username" required placeholder="Enter Moodle username">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Moodle Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                <input type="password" class="form-control" id="password" required placeholder="Enter Moodle password">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="registerNumber" class="form-label">Register Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-hash"></i></span>
+                                <input type="text" class="form-control" id="registerNumber" required 
+                                       placeholder="12-digit register number" 
+                                       pattern="\d{12}" 
+                                       maxlength="12">
+                            </div>
+                            <small class="text-muted">Your 12-digit university register number</small>
+                        </div>
+                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
+                        <button type="submit" class="btn btn-submit w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Login to View Papers
+                        </button>
+                    </form>
+                    <div class="moodle-info mt-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <small>Your Moodle credentials will be securely used to submit papers to the LMS. We do not store your password.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>
+                            <i class="bi bi-hand-wave me-2"></i>
+                            Welcome, <span id="studentName">Student</span>!
+                        </h2>
+                        <p class="text-muted mb-0">View and submit your examination answer sheets to Moodle</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-row justify-content-end">
+                            <div class="stat-item total">
+                                <div class="stat-number" id="totalPapers">0</div>
+                                <small>Total</small>
+                            </div>
+                            <div class="stat-item pending">
+                                <div class="stat-number" id="pendingPapers">0</div>
+                                <small>Pending</small>
+                            </div>
+                            <div class="stat-item submitted">
+                                <div class="stat-number" id="submittedPapers">0</div>
+                                <small>Submitted</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Papers Grid -->
+            <div class="row" id="papersGrid">
+                <!-- Papers will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="card" id="emptyState" style="display: none;">
+                <div class="empty-state">
+                    <i class="bi bi-file-earmark-x"></i>
+                    <h4 class="mt-3">No Papers Available</h4>
+                    <p class="text-muted">There are no examination papers assigned to your register number yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Paper Modal -->
+    <div class="modal fade" id="viewPaperModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <span id="modalPaperTitle">View Paper</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <iframe id="paperFrame" src=""></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-submit" id="modalSubmitBtn" onclick="submitFromModal()">
+                        <i class="bi bi-cloud-upload me-2"></i>
+                        Submit to Moodle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Confirmation Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-question-circle me-2"></i>
+                        Confirm Submission
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to submit this paper to Moodle?</p>
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong> This action will submit your answer sheet to the assignment in Moodle. Make sure you have verified your paper before submitting.
+                    </div>
+                    <div id="confirmDetails" class="bg-light p-3 rounded">
+                        <p class="mb-1"><strong>Subject:</strong> <span id="confirmSubject"></span></p>
+                        <p class="mb-0"><strong>File:</strong> <span id="confirmFilename"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-submit" id="confirmSubmitBtn" onclick="confirmSubmission()">
+                        <i class="bi bi-check-lg me-2"></i>
+                        Yes, Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="resultModalHeader">
+                    <h5 class="modal-title" id="resultModalTitle">Submission Result</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4" id="resultModalBody">
+                    <!-- Result content will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // State
+        let sessionToken = null;
+        let studentRegNo = null;
+        let papers = [];
+        let currentPaperId = null;
+        
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        // Check for existing session
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('studentToken');
+            const regNo = localStorage.getItem('studentRegNo');
+            const name = localStorage.getItem('studentName');
+            
+            if (token && regNo) {
+                // Validate session is still active by attempting to load papers
+                sessionToken = token;
+                studentRegNo = regNo;
+                
+                try {
+                    showLoading();
+                    showDashboard(name || regNo);
+                    await loadPapers();
+                    hideLoading();
+                } catch (error) {
+                    // Session expired or invalid, clear and show login
+                    console.log('Session validation failed:', error);
+                    logout();
+                    hideLoading();
+                }
+            }
+        });
+        
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const registerNumber = document.getElementById('registerNumber').value;
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/auth/student/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        register_number: registerNumber
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.session_id) {
+                    // Clear any existing session data first
+                    localStorage.clear();
+                    
+                    sessionToken = data.session_id;
+                    studentRegNo = registerNumber;
+                    
+                    localStorage.setItem('studentToken', sessionToken);
+                    localStorage.setItem('studentRegNo', registerNumber);
+                    localStorage.setItem('studentName', data.full_name || username);
+                    
+                    showDashboard(data.full_name || username);
+                    await loadPapers();
+                } else {
+                    showLoginError(data.detail || 'Login failed');
+                }
+            } catch (error) {
+                showLoginError('Connection error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        function showDashboard(name) {
+            loginSection.classList.remove('active');
+            dashboardSection.classList.add('active');
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('userName').textContent = studentRegNo;
+            document.getElementById('logoutBtn').style.display = 'block';
+            document.getElementById('studentName').textContent = name;
+        }
+        
+        function logout() {
+            sessionToken = null;
+            studentRegNo = null;
+            papers = [];
+            
+            localStorage.removeItem('studentToken');
+            localStorage.removeItem('studentRegNo');
+            localStorage.removeItem('studentName');
+            
+            dashboardSection.classList.remove('active');
+            loginSection.classList.add('active');
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('papersGrid').innerHTML = '';
+        }
+        
+        async function loadPapers() {
+            showLoading();
+            
+            try {
+                const response = await fetch('/student/dashboard', {
+                    headers: {
+                        'X-Session-ID': sessionToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Map pending_papers from API to expected format
+                    const pendingPapers = (data.pending_papers || []).map(p => ({
+                        id: p.artifact_uuid,
+                        artifact_uuid: p.artifact_uuid,
+                        subject_code: p.subject_code,
+                        subject_name: p.subject_name,
+                        original_filename: p.filename,
+                        filename: p.filename,
+                        upload_timestamp: p.uploaded_at,
+                        workflow_status: 'pending',
+                        can_submit: p.can_submit,
+                        message: p.message,
+                        file_extension: p.filename ? p.filename.split('.').pop() : ''
+                    }));
+                    
+                    // Map submitted_papers from API
+                    const submittedPapers = (data.submitted_papers || []).map(p => ({
+                        id: p.artifact_uuid,
+                        artifact_uuid: p.artifact_uuid,
+                        subject_code: p.parsed_subject_code,
+                        original_filename: p.original_filename,
+                        filename: p.original_filename,
+                        upload_timestamp: p.uploaded_at,
+                        submit_timestamp: p.submit_timestamp,
+                        workflow_status: 'submitted_to_moodle',
+                        file_extension: p.original_filename ? p.original_filename.split('.').pop() : ''
+                    }));
+                    
+                    papers = [...pendingPapers, ...submittedPapers];
+                    renderPapers();
+                    updateStats();
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    console.error('Failed to load papers:', data);
+                }
+            } catch (error) {
+                console.error('Error loading papers:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function renderPapers() {
+            const grid = document.getElementById('papersGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (papers.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            grid.innerHTML = papers.map(paper => {
+                const isSubmitted = paper.workflow_status === 'submitted_to_moodle';
+                const canSubmit = paper.can_submit !== false;
+                const statusClass = isSubmitted ? 'submitted' : 'pending';
+                const statusText = isSubmitted ? 'Submitted' : 'Pending';
+                
+                const isImage = ['jpg', 'jpeg', 'png'].includes(paper.file_extension?.toLowerCase());
+                const previewContent = isImage 
+                    ? `<img src="/student/paper/${paper.artifact_uuid}/view" alt="Paper preview" onerror="this.parentElement.innerHTML='<i class=\\'bi bi-image text-secondary\\' style=\\'font-size: 5rem;\\'></i>'">` 
+                    : `<i class="bi bi-file-pdf pdf-icon"></i>`;
+                
+                return `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card paper-card h-100">
+                            <div class="paper-preview">
+                                ${previewContent}
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="card-title mb-0">${paper.subject_code}</h5>
+                                    <span class="status-badge status-${statusClass}">${statusText}</span>
+                                </div>
+                                ${paper.subject_name ? `<p class="card-text text-muted small mb-1">${paper.subject_name}</p>` : ''}
+                                <p class="card-text text-muted small">
+                                    <i class="bi bi-file-earmark me-1"></i>
+                                    ${paper.filename || paper.original_filename}
+                                </p>
+                                <p class="card-text text-muted small mb-3">
+                                    <i class="bi bi-calendar me-1"></i>
+                                    Uploaded: ${new Date(paper.upload_timestamp).toLocaleDateString()}
+                                </p>
+                                ${paper.message ? `<p class="text-warning small"><i class="bi bi-exclamation-triangle me-1"></i>${paper.message}</p>` : ''}
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary btn-sm flex-grow-1" onclick="viewPaper('${paper.artifact_uuid}', '${paper.subject_code}', ${isSubmitted})">
+                                        <i class="bi bi-eye me-1"></i> View
+                                    </button>
+                                    ${!isSubmitted ? `
+                                        <button class="btn btn-submit btn-sm flex-grow-1" ${!canSubmit ? 'disabled' : ''} onclick="initSubmission('${paper.artifact_uuid}', '${paper.subject_code}', '${paper.filename || paper.original_filename}')">
+                                            <i class="bi bi-cloud-upload me-1"></i> Submit
+                                        </button>
+                                    ` : `
+                                        <button class="btn btn-success btn-sm flex-grow-1" disabled>
+                                            <i class="bi bi-check-circle me-1"></i> Done
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateStats() {
+            const total = papers.length;
+            const submitted = papers.filter(p => p.workflow_status === 'submitted_to_moodle').length;
+            const pending = total - submitted;
+            
+            document.getElementById('totalPapers').textContent = total;
+            document.getElementById('pendingPapers').textContent = pending;
+            document.getElementById('submittedPapers').textContent = submitted;
+        }
+        
+        function viewPaper(paperId, subjectCode, isSubmitted) {
+            currentPaperId = paperId;
+            
+            document.getElementById('modalPaperTitle').textContent = `${subjectCode} - Answer Sheet`;
+            document.getElementById('paperFrame').src = `/student/paper/${paperId}/view`;
+            document.getElementById('modalSubmitBtn').style.display = isSubmitted ? 'none' : 'block';
+            
+            const modal = new bootstrap.Modal(document.getElementById('viewPaperModal'));
+            modal.show();
+        }
+        
+        function submitFromModal() {
+            if (currentPaperId) {
+                const paper = papers.find(p => p.id === currentPaperId);
+                if (paper) {
+                    initSubmission(paper.id, paper.subject_code, paper.original_filename);
+                }
+            }
+        }
+        
+        function initSubmission(paperId, subjectCode, filename) {
+            currentPaperId = paperId;
+            
+            document.getElementById('confirmSubject').textContent = subjectCode;
+            document.getElementById('confirmFilename').textContent = filename;
+            
+            // Close view modal if open
+            const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewPaperModal'));
+            if (viewModal) viewModal.hide();
+            
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+        }
+        
+        async function confirmSubmission() {
+            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            confirmModal.hide();
+            
+            showLoading();
+            
+            try {
+                const response = await fetch(`/student/submit/${currentPaperId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Session-ID': sessionToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                hideLoading();
+                
+                if (response.ok && data.success) {
+                    showResult(true, 'Submission Successful!', `
+                        <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
+                        <h4 class="mt-3">Paper Submitted Successfully</h4>
+                        <p class="text-muted">Your answer sheet has been submitted to Moodle.</p>
+                        ${data.moodle_submission_id ? `<small class="text-muted">Submission ID: ${data.moodle_submission_id}</small>` : ''}
+                    `);
+                    
+                    // Refresh papers list
+                    await loadPapers();
+                } else {
+                    showResult(false, 'Submission Failed', `
+                        <i class="bi bi-x-circle text-danger" style="font-size: 4rem;"></i>
+                        <h4 class="mt-3">Submission Failed</h4>
+                        <p class="text-muted">${data.detail || data.message || 'An error occurred during submission.'}</p>
+                    `);
+                }
+            } catch (error) {
+                hideLoading();
+                showResult(false, 'Error', `
+                    <i class="bi bi-exclamation-triangle text-warning" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3">Connection Error</h4>
+                    <p class="text-muted">Failed to connect to the server. Please try again.</p>
+                `);
+            }
+        }
+        
+        function showResult(success, title, content) {
+            const header = document.getElementById('resultModalHeader');
+            header.style.background = success 
+                ? 'linear-gradient(135deg, #059669, #047857)' 
+                : 'linear-gradient(135deg, #dc2626, #b91c1c)';
+            
+            document.getElementById('resultModalTitle').textContent = title;
+            document.getElementById('resultModalBody').innerHTML = content;
+            
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+        }
+        
+        function showLoading() {
+            loadingOverlay.classList.add('active');
+        }
+        
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
