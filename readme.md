@@ -1,16 +1,81 @@
-# Examination Middleware
+#  Examination Middleware (LMS-SAE Bridge)
 
-A FastAPI-based middleware system that bridges scanned examination answer sheets with Moodle LMS, enabling secure student submissions.
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-336791.svg)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Moodle](https://img.shields.io/badge/Integration-Moodle%20LMS-orange)
 
-## 🌟 Features
+**Examination Middleware** is a robust, secure, and automated bridge designed to streamline the digitization and submission of physical examination answer sheets to the Moodle Learning Management System (LMS). It acts as an intelligent intermediary between the physical examination hall and the digital grading environment.
 
-- **Staff Upload Portal**: Bulk upload of scanned answer sheets with automatic metadata extraction
-- **Student Portal**: View and submit assigned papers directly to Moodle
-- **Moodle Integration**: Complete 3-step submission workflow (upload → save → submit)
-- **Security**: JWT authentication for staff, Moodle token exchange for students
-- **Audit Trail**: Complete logging of all operations
-- **Filename Validation**: Automatic extraction of register number and subject code
+---
 
+##  The Problem Statement
+
+In academic institutions transitioning to digital grading, handling physical answer scripts presents significant logistical challenges:
+
+1.  **Manual Labor**: Individually scanning, renaming, and uploading hundreds of answer scripts to specific Moodle assignments is time-consuming and inefficient.
+2.  **Human Error**: Manual processes are prone to errors such as uploading the wrong file to a student's profile or mislabeling files.
+3.  **Security & Integrity**: Direct database manipulation or unverified bulk uploads can compromise the chain of custody.
+4.  **Student Verification**: Students often lack a mechanism to verify that their specific physical paper was scanned and submitted correctly before grading begins.
+
+##  Proposed Solution & Architecture
+
+This middleware solves these issues by decoupling the **scanning/uploading** process from the **submission** process, introducing a secure validation layer.
+
+### Core Concept
+The system utilizes a **3-Step "Upload-Verify-Push" Workflow**:
+1.  **Bulk Ingestion**: Administrative staff upload bulk batches of scanned PDF/Images.
+2.  **Intelligent Processing**: The system parses filenames (e.g., `123456_MATH101.pdf`) to extract the Student Register Number and Subject Code, automatically mapping them to the correct Moodle Assignment ID.
+3.  **Student-Led Submission**: Students log in using their Moodle credentials. They view *only* their specific answer scripts and trigger the final submission to Moodle. This ensures non-repudiation and student verification.
+
+### High-Level Architecture
+
+```mermaid
+graph LR
+    A[Physical Scans] -->|Bulk Upload| B(Staff Portal / Middleware)
+    B -->|Parse & Store| C{PostgreSQL DB}
+    D[Student] -->|Login via Moodle Creds| E(Student Portal)
+    E -->|Fetch Pending Papers| C
+    E -->|Trigger Submission| F[Moodle LMS]
+    F -->|Token Exchange| E
+```
+## Database Schema Overview
+
+The database is designed for data integrity and auditability. Key models include:
+
+| Model | Description |
+| :--- | :--- |
+| **`ExaminationArtifact`** | The core entity representing a scanned paper. Stores UUID, file path, hash (SHA-256), extracted metadata (Reg No, Subject), and current `WorkflowStatus` (e.g., `PENDING`, `SUBMITTED_TO_LMS`). |
+| **`SubjectMapping`** | Configuration table mapping a Subject Code (e.g., `19AI405`) to a specific Moodle Course ID and Assignment ID. |
+| **`StaffUser`** | Accounts for administrative staff authorized to perform bulk uploads. |
+| **`StudentSession`** | Manages ephemeral student sessions. Stores encrypted Moodle access tokens used to perform submissions on behalf of the student. |
+| **`AuditLog`** | A rigid ledger tracking every action (Upload, View, Submit) with IP addresses and timestamps to ensure a chain of custody. |
+| **`SubmissionQueue`** | A buffer for handling Moodle API failures or maintenance windows, ensuring no submission is lost. |
+
+---
+
+## 🔄 Workflow of the Platform
+
+### Phase 1: Administration & Setup
+1.  **Mapping**: Admin configures the `SubjectMapping` table (e.g., Subject `CS101` targets Moodle Assignment `ID: 55`).
+2.  **Scanning**: Examination cell scans answer sheets using the naming convention: `{RegisterNumber}_{SubjectCode}.pdf`.
+
+### Phase 2: Staff Operations
+1.  **Login**: Staff logs into the Staff Portal.
+2.  **Bulk Upload**: Staff drags and drops folders of scanned files.
+3.  **Validation**: The system instantly validates filenames. Invalid files are rejected; valid files are hashed and stored as `ExaminationArtifacts` with status `PENDING`.
+
+### Phase 3: Student Operations
+1.  **Login**: Student logs into the Student Portal using their university Moodle username and password.
+2.  **Dashboard**: The system displays all papers tagged with their Register Number.
+3.  **Review**: Student previews the PDF to ensure it is their paper.
+4.  **Submit**: Student clicks "Submit".
+    * *Backend Action*: The system authenticates with Moodle using the student's token.
+    * *Backend Action*: Uploads the file to Moodle's draft area.
+    * *Backend Action*: Finalizes the submission for grading.
+5.  **Confirmation**: The status updates to `SUBMITTED_TO_LMS`.
+   
 ## 📋 Prerequisites
 
 - Python 3.10+
@@ -327,7 +392,7 @@ Verify assignment allows file submissions
 
 ## 📄 License
 
-MIT License
+Not Licensed Yet.
 
 ## 🤝 Contributing
 
