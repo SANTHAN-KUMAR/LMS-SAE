@@ -3,7 +3,6 @@
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-336791.svg)
-![License](https://img.shields.io/badge/license-MIT-green)
 ![Moodle](https://img.shields.io/badge/Integration-Moodle%20LMS-orange)
 
 **Examination Middleware** is a robust, secure, and automated bridge designed to streamline the digitization and submission of physical examination answer sheets to the Moodle Learning Management System (LMS). It acts as an intelligent intermediary between the physical examination hall and the digital grading environment.
