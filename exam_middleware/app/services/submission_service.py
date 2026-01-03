@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models import ExaminationArtifact, WorkflowStatus
 from app.services.moodle_client import MoodleClient, MoodleAPIError
 from app.services.artifact_service import ArtifactService, SubjectMappingService, AuditService
+from app.services.subject_discovery_service import SubjectDiscoveryService
 from app.core.security import token_encryption
 from app.core.config import settings
 
@@ -31,6 +32,7 @@ class SubmissionService:
         self.db = db
         self.artifact_service = ArtifactService(db)
         self.mapping_service = SubjectMappingService(db)
+        self.discovery_service = SubjectDiscoveryService(db)  # Hybrid discovery
         self.audit_service = AuditService(db)
     
     async def submit_artifact(
@@ -90,8 +92,8 @@ class SubmissionService:
                 "submitted_at": artifact.submit_timestamp.isoformat() if artifact.submit_timestamp else None
             }
         
-        # Get assignment ID
-        assignment_id = await self._resolve_assignment_id(artifact)
+        # Get assignment ID (uses hybrid discovery with dynamic Moodle lookup)
+        assignment_id = await self._resolve_assignment_id(artifact, moodle_token=moodle_token)
         if not assignment_id:
             return False, f"No assignment mapping found for subject code: {artifact.parsed_subject_code}", None
         
@@ -193,15 +195,31 @@ class SubmissionService:
             
             return False, f"Unexpected error: {str(e)}", None
     
-    async def _resolve_assignment_id(self, artifact: ExaminationArtifact) -> Optional[int]:
-        """Resolve the Moodle assignment ID for an artifact"""
+    async def _resolve_assignment_id(
+        self, 
+        artifact: ExaminationArtifact,
+        moodle_token: Optional[str] = None
+    ) -> Optional[int]:
+        """
+        Resolve the Moodle assignment ID for an artifact.
+        
+        Uses the hybrid discovery service which checks:
+        1. Cache
+        2. Database
+        3. Dynamic Moodle API discovery (if token provided)
+        4. Config fallback
+        """
         if artifact.moodle_assignment_id:
             return artifact.moodle_assignment_id
         
         if not artifact.parsed_subject_code:
             return None
         
-        return await self.mapping_service.get_assignment_id(artifact.parsed_subject_code)
+        # Use the new hybrid discovery service
+        return await self.discovery_service.get_assignment_id(
+            artifact.parsed_subject_code,
+            user_token=moodle_token
+        )
     
     async def _execute_submission(
         self,

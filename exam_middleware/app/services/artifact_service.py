@@ -347,9 +347,11 @@ class ArtifactService:
         offset: int = 0
     ) -> Tuple[List[ExaminationArtifact], int]:
         """Get all pending artifacts (for admin view)"""
-        # Get count
+        from sqlalchemy import func
+        
+        # PERFORMANCE FIX: Use COUNT aggregate instead of loading all rows
         count_result = await self.db.execute(
-            select(ExaminationArtifact)
+            select(func.count(ExaminationArtifact.id))
             .where(
                 ExaminationArtifact.workflow_status.in_([
                     WorkflowStatus.PENDING,
@@ -357,7 +359,7 @@ class ArtifactService:
                 ])
             )
         )
-        total = len(count_result.scalars().all())
+        total = count_result.scalar() or 0
         
         # Get paginated results
         result = await self.db.execute(
@@ -376,15 +378,29 @@ class ArtifactService:
         return list(result.scalars().all()), total
     
     async def get_stats(self) -> Dict[str, int]:
-        """Get artifact statistics"""
-        stats = {}
+        """
+        Get artifact statistics.
         
-        for status in WorkflowStatus:
-            result = await self.db.execute(
-                select(ExaminationArtifact)
-                .where(ExaminationArtifact.workflow_status == status)
+        PERFORMANCE FIX: Uses single GROUP BY query instead of N queries.
+        Previous implementation did one query per status (11+ queries).
+        """
+        from sqlalchemy import func
+        
+        # Initialize all statuses to 0
+        stats = {status.value.lower(): 0 for status in WorkflowStatus}
+        
+        # Single query with GROUP BY
+        result = await self.db.execute(
+            select(
+                ExaminationArtifact.workflow_status,
+                func.count(ExaminationArtifact.id)
             )
-            stats[status.value.lower()] = len(result.scalars().all())
+            .group_by(ExaminationArtifact.workflow_status)
+        )
+        
+        # Map results to stats dict
+        for status, count in result.all():
+            stats[status.value.lower()] = count
         
         return stats
 

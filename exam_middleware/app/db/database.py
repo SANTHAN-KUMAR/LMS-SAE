@@ -4,7 +4,7 @@ SQLAlchemy Database Configuration and Session Management
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import declarative_base
-from sqlalchemy.pool import NullPool
+from sqlalchemy.pool import AsyncAdaptedQueuePool
 from typing import AsyncGenerator
 import logging
 
@@ -12,11 +12,21 @@ from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Create async engine
+# Create async engine with proper connection pooling
+# Note: Previously used NullPool which created a new connection for every request
+# causing performance issues and potential connection exhaustion under load
 engine = create_async_engine(
     settings.database_url_computed,
     echo=settings.debug,
-    poolclass=NullPool,  # Disable pooling for async
+    
+    # Use proper connection pooling for production
+    poolclass=AsyncAdaptedQueuePool,
+    pool_size=10,           # Base number of connections to maintain
+    max_overflow=20,        # Additional connections allowed under high load
+    pool_timeout=30,        # Seconds to wait for connection before error
+    pool_recycle=1800,      # Recycle connections after 30 minutes (prevents stale)
+    pool_pre_ping=True,     # Validate connections before use (handles disconnects)
+    
     future=True,
 )
 

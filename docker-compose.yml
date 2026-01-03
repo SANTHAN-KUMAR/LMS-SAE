@@ -1,0 +1,186 @@
+# ================================================
+# Docker Compose for LMS-SAE Examination Middleware
+# ================================================
+# Complete development and production environment
+# 
+# Usage:
+#   Development:  docker-compose up -d
+#   Production:   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#   Logs:         docker-compose logs -f app
+#   Stop:         docker-compose down
+#   Clean:        docker-compose down -v --rmi all
+
+version: '3.8'
+
+services:
+  # ============================================
+  # Main Application
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: exam-middleware
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      # Application
+      - APP_NAME=${APP_NAME:-Examination Middleware}
+      - APP_VERSION=${APP_VERSION:-1.0.0}
+      - DEBUG=${DEBUG:-false}
+      - SECRET_KEY=${SECRET_KEY:-change-this-secret-key-in-production}
+      
+      # Database
+      - DATABASE_URL=postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:-exampass}@db:5432/${POSTGRES_DB:-exam_middleware}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-exampass}
+      - POSTGRES_DB=${POSTGRES_DB:-exam_middleware}
+      
+      # Redis (optional)
+      - REDIS_URL=redis://redis:6379/0
+      
+      # Moodle
+      - MOODLE_BASE_URL=${MOODLE_BASE_URL:-http://localhost}
+      - MOODLE_ADMIN_TOKEN=${MOODLE_ADMIN_TOKEN:-}
+      
+      # File Storage
+      - UPLOAD_DIR=/app/uploads
+      - MAX_FILE_SIZE_MB=${MAX_FILE_SIZE_MB:-50}
+      - ALLOWED_EXTENSIONS=${ALLOWED_EXTENSIONS:-.pdf,.jpg,.jpeg,.png}
+      
+      # CORS
+      - CORS_ORIGINS=${CORS_ORIGINS:-["http://localhost:8000","http://localhost:3000"]}
+    volumes:
+      # Persist uploads and storage
+      - uploads_data:/app/uploads
+      - storage_data:/app/storage
+      - logs_data:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - exam_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================
+  # PostgreSQL Database
+  # ============================================
+  db:
+    image: postgres:15-alpine
+    container_name: exam-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-exampass}
+      - POSTGRES_DB=${POSTGRES_DB:-exam_middleware}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: Initialize with custom SQL
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    networks:
+      - exam_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ${POSTGRES_DB:-exam_middleware}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ============================================
+  # Redis (Optional - for caching/sessions)
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: exam-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - exam_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # Nginx Reverse Proxy (Production)
+  # ============================================
+  nginx:
+    image: nginx:alpine
+    container_name: exam-nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      # SSL certificates (uncomment for HTTPS)
+      # - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - exam_network
+    profiles:
+      - production
+
+  # ============================================
+  # Database Admin (Development only)
+  # ============================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: exam-pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@exam.local}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-admin}
+      - PGADMIN_CONFIG_SERVER_MODE=False
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - db
+    networks:
+      - exam_network
+    profiles:
+      - dev
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  exam_network:
+    driver: bridge
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  uploads_data:
+    driver: local
+  storage_data:
+    driver: local
+  logs_data:
+    driver: local
+  pgadmin_data:
+    driver: local
