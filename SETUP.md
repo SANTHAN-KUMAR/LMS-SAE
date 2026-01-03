@@ -114,6 +114,32 @@ Access:
 - Student Portal: `http://localhost:8000/portal/student`
 - Health Check: `http://localhost:8000/health`
 
+## 7. Moodle LMS Admin Setup
+
+As a Moodle admin, configure Moodle for API interactions with the middleware:
+
+1. **Enable Web Services**:
+   - Site Administration > Advanced features > Enable web services: Yes.
+   - Site Administration > Plugins > Web services > Manage protocols > Enable REST.
+
+2. **Create a Dedicated User**:
+   - Create a new user (e.g., "middleware_user") with access to relevant courses.
+
+3. **Configure Permissions**:
+   - Assign capabilities: `moodle/webservice:createtoken`, `mod/assign:view`, `mod/assign:submit`, `webservice/rest:use`.
+
+4. **Create a Web Service**:
+   - Add service "Exam Middleware Service" with functions: `mod_assign_get_assignments`, `mod_assign_get_submissions`, `core_files_upload`, etc.
+
+5. **Generate API Token**:
+   - Create token for the user; update `MOODLE_ADMIN_TOKEN` in `.env`.
+
+6. **Set Up Assignments**:
+   - Create assignments in courses with file submission enabled.
+
+7. **Test Connectivity**:
+   - Verify API calls and middleware health.
+
 ## Troubleshooting
 - **401 Login Error**: Ensure admin user exists in DB.
 - **DB Connection Issues**: Verify PostgreSQL is running and credentials are correct.
