@@ -651,3 +651,394 @@ WHERE examination_artifacts.parsed_reg_no = $1::VARCHAR AND examination_artifact
 2025-12-02 22:47:39,866 - app.db.database - ERROR - Database session error: [{'type': 'missing', 'loc': ('header', 'X-Session-ID'), 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
 2025-12-02 22:51:43,043 - app.main - INFO - Shutting down Examination Middleware...
 2025-12-02 22:51:43,043 - app.main - INFO - Database connections closed
+2025-12-23 13:14:16,265 - app.main - INFO - Starting Examination Middleware...
+2025-12-23 13:14:16,326 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-12-23 13:14:16,326 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-23 13:14:16,329 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-12-23 13:14:16,330 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-23 13:14:16,331 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-12-23 13:14:16,331 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-12-23 13:14:16,332 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-23 13:14:16,334 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,335 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] ('examination_artifacts', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,348 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,348 - sqlalchemy.engine.Engine - INFO - [cached since 0.01375s ago] ('subject_mappings', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,348 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,349 - sqlalchemy.engine.Engine - INFO - [cached since 0.015s ago] ('staff_users', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,349 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,350 - sqlalchemy.engine.Engine - INFO - [cached since 0.01594s ago] ('student_sessions', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,350 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,351 - sqlalchemy.engine.Engine - INFO - [cached since 0.01709s ago] ('audit_logs', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,352 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,352 - sqlalchemy.engine.Engine - INFO - [cached since 0.01817s ago] ('submission_queue', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,352 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-12-23 13:14:16,353 - sqlalchemy.engine.Engine - INFO - [cached since 0.01919s ago] ('system_config', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-12-23 13:14:16,355 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = $1::VARCHAR AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != $2::VARCHAR
+2025-12-23 13:14:16,355 - sqlalchemy.engine.Engine - INFO - [generated in 0.00053s] ('workflowstatus', 'pg_catalog')
+2025-12-23 13:14:16,358 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-23 13:14:16,361 - app.main - INFO - Database tables created/verified
+2025-12-23 13:14:16,361 - app.main - INFO - Upload directory: D:\LMS-SAE\exam_middleware\uploads
+2025-12-23 13:14:16,361 - app.main - INFO - Storage directory: D:\LMS-SAE\exam_middleware\storage
+2025-12-23 13:14:16,362 - app.main - INFO - Examination Middleware started successfully
+2025-12-23 13:14:53,921 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-23 13:14:53,928 - sqlalchemy.engine.Engine - INFO - SELECT student_sessions.id, student_sessions.session_id, student_sessions.moodle_user_id, student_sessions.moodle_username, student_sessions.moodle_fullname, student_sessions.encrypted_token, student_sessions.token_expires_at, student_sessions.ip_address, student_sessions.user_agent, student_sessions.created_at, student_sessions.last_activity_at, student_sessions.expires_at 
+FROM student_sessions 
+WHERE student_sessions.session_id = $1::VARCHAR
+2025-12-23 13:14:53,929 - sqlalchemy.engine.Engine - INFO - [generated in 0.00077s] ('0Crl-CJP2owmc09tGRPCkfIAKbRBsIC0cWe0KWbDVXk',)
+2025-12-23 13:14:53,941 - sqlalchemy.engine.Engine - INFO - DELETE FROM student_sessions WHERE student_sessions.id = $1::INTEGER
+2025-12-23 13:14:53,941 - sqlalchemy.engine.Engine - INFO - [generated in 0.00066s] (22,)
+2025-12-23 13:14:53,942 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-23 13:14:53,945 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:15:24,281 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:24,282 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-23 13:15:24,283 - multipart.multipart - DEBUG - Calling on_header_value with data[63:123]
+2025-12-23 13:15:24,283 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:24,283 - multipart.multipart - DEBUG - Calling on_header_field with data[125:137]
+2025-12-23 13:15:24,283 - multipart.multipart - DEBUG - Calling on_header_value with data[139:149]
+2025-12-23 13:15:24,284 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:24,284 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:24,284 - multipart.multipart - DEBUG - Calling on_part_data with data[153:32768]
+2025-12-23 13:15:24,284 - multipart.multipart - DEBUG - Calling on_part_data with data[0:12340]
+2025-12-23 13:15:24,286 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,286 - multipart.multipart - DEBUG - Calling on_part_data with data[12341:32768]
+2025-12-23 13:15:24,293 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,293 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,293 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,294 - multipart.multipart - DEBUG - Calling on_part_data with data[0:8597]
+2025-12-23 13:15:24,294 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,294 - multipart.multipart - DEBUG - Calling on_part_data with data[8598:32768]
+2025-12-23 13:15:24,295 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1557]
+2025-12-23 13:15:24,295 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,295 - multipart.multipart - DEBUG - Calling on_part_data with data[1558:32768]
+2025-12-23 13:15:24,295 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[0:14193]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[14194:32768]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[0:21089]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,296 - multipart.multipart - DEBUG - Calling on_part_data with data[21090:32768]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[0:4213]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[4214:30072]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[30073:32768]
+2025-12-23 13:15:24,298 - multipart.multipart - DEBUG - Calling on_part_data with data[0:65536]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32764]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[32765:32768]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[0:12260]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,299 - multipart.multipart - DEBUG - Calling on_part_data with data[12261:16384]
+2025-12-23 13:15:24,300 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:24,300 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,300 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:6024]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[6025:16384]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:29760]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[29761:32768]
+2025-12-23 13:15:24,301 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:24,303 - multipart.multipart - DEBUG - Calling on_part_data with data[0:9601]
+2025-12-23 13:15:24,303 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,303 - multipart.multipart - DEBUG - Calling on_part_data with data[9602:16384]
+2025-12-23 13:15:24,303 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-12-23 13:15:24,303 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[0:4044]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[4045:17483]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:24,304 - multipart.multipart - DEBUG - Calling on_part_data with data[17484:32768]
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_part_data with data[0:44219]
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_header_field with data[44263:44282]
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_header_value with data[44284:44314]
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_part_data with data[44318:44326]
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:24,305 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-23 13:15:24,314 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:15:29,325 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_value with data[63:123]
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_field with data[125:137]
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_value with data[139:149]
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:29,326 - multipart.multipart - DEBUG - Calling on_part_data with data[153:32768]
+2025-12-23 13:15:29,328 - multipart.multipart - DEBUG - Calling on_part_data with data[0:5936]
+2025-12-23 13:15:29,328 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,328 - multipart.multipart - DEBUG - Calling on_part_data with data[5937:54746]
+2025-12-23 13:15:29,328 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,328 - multipart.multipart - DEBUG - Calling on_part_data with data[54747:229376]
+2025-12-23 13:15:29,329 - multipart.multipart - DEBUG - Calling on_part_data with data[0:8808]
+2025-12-23 13:15:29,329 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,329 - multipart.multipart - DEBUG - Calling on_part_data with data[8809:138027]
+2025-12-23 13:15:29,329 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,329 - multipart.multipart - DEBUG - Calling on_part_data with data[138028:147927]
+2025-12-23 13:15:29,330 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,330 - multipart.multipart - DEBUG - Calling on_part_data with data[147928:208868]
+2025-12-23 13:15:29,330 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,330 - multipart.multipart - DEBUG - Calling on_part_data with data[208869:229376]
+2025-12-23 13:15:29,332 - multipart.multipart - DEBUG - Calling on_part_data with data[0:8849]
+2025-12-23 13:15:29,332 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,332 - multipart.multipart - DEBUG - Calling on_part_data with data[8850:136354]
+2025-12-23 13:15:29,332 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,333 - multipart.multipart - DEBUG - Calling on_part_data with data[136355:206209]
+2025-12-23 13:15:29,333 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,333 - multipart.multipart - DEBUG - Calling on_part_data with data[206210:262144]
+2025-12-23 13:15:29,334 - multipart.multipart - DEBUG - Calling on_part_data with data[0:50636]
+2025-12-23 13:15:29,334 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,334 - multipart.multipart - DEBUG - Calling on_part_data with data[50637:86901]
+2025-12-23 13:15:29,334 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:29,335 - multipart.multipart - DEBUG - Calling on_part_data with data[86902:109755]
+2025-12-23 13:15:29,335 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:29,335 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:29,335 - multipart.multipart - DEBUG - Calling on_header_field with data[109799:109818]
+2025-12-23 13:15:29,335 - multipart.multipart - DEBUG - Calling on_header_value with data[109820:109850]
+2025-12-23 13:15:29,336 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:29,336 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:29,336 - multipart.multipart - DEBUG - Calling on_part_data with data[109854:109862]
+2025-12-23 13:15:29,337 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:29,337 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-23 13:15:29,337 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:15:38,904 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:38,904 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-23 13:15:38,904 - multipart.multipart - DEBUG - Calling on_header_value with data[63:123]
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_header_field with data[125:137]
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_header_value with data[139:149]
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:38,905 - multipart.multipart - DEBUG - Calling on_part_data with data[153:254]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[256:2417]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[2418:49152]
+2025-12-23 13:15:38,906 - multipart.multipart - DEBUG - Calling on_part_data with data[0:98304]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[0:19423]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[19424:32768]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[0:11838]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,907 - multipart.multipart - DEBUG - Calling on_part_data with data[11839:16384]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,908 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,910 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,910 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,910 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,910 - multipart.multipart - DEBUG - Calling on_part_data with data[0:12855]
+2025-12-23 13:15:38,911 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,911 - multipart.multipart - DEBUG - Calling on_part_data with data[12856:16384]
+2025-12-23 13:15:38,911 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,911 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:38,911 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:15:38,912 - multipart.multipart - DEBUG - Calling on_part_data with data[0:5987]
+2025-12-23 13:15:38,912 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:15:38,912 - multipart.multipart - DEBUG - Calling on_part_data with data[5988:16384]
+2025-12-23 13:15:38,912 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_part_data with data[0:61509]
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_header_field with data[61553:61572]
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_header_value with data[61574:61604]
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_part_data with data[61608:61616]
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:38,913 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-23 13:15:38,915 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:15:51,389 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:51,390 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-23 13:15:51,391 - multipart.multipart - DEBUG - Calling on_header_value with data[63:89]
+2025-12-23 13:15:51,391 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:51,392 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:51,392 - multipart.multipart - DEBUG - Calling on_part_data with data[93:98]
+2025-12-23 13:15:51,393 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:51,393 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:15:51,394 - multipart.multipart - DEBUG - Calling on_header_field with data[142:161]
+2025-12-23 13:15:51,394 - multipart.multipart - DEBUG - Calling on_header_value with data[163:189]
+2025-12-23 13:15:51,394 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:15:51,395 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:15:51,395 - multipart.multipart - DEBUG - Calling on_part_data with data[193:201]
+2025-12-23 13:15:51,396 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:15:51,396 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-23 13:15:51,485 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-23 13:15:51,487 - sqlalchemy.engine.Engine - INFO - SELECT staff_users.id, staff_users.username, staff_users.email, staff_users.hashed_password, staff_users.full_name, staff_users.role, staff_users.is_active, staff_users.created_at, staff_users.last_login_at 
+FROM staff_users 
+WHERE staff_users.username = $1::VARCHAR
+2025-12-23 13:15:51,487 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] ('admin',)
+2025-12-23 13:15:51,725 - sqlalchemy.engine.Engine - INFO - UPDATE staff_users SET last_login_at=$1::TIMESTAMP WITH TIME ZONE WHERE staff_users.id = $2::INTEGER
+2025-12-23 13:15:51,726 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] (datetime.datetime(2025, 12, 23, 7, 45, 51, 724030, tzinfo=datetime.timezone.utc), 1)
+2025-12-23 13:15:51,739 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-23 13:16:00,002 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:16:00,002 - multipart.multipart - DEBUG - Calling on_header_field with data[42:61]
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_header_value with data[63:123]
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_header_field with data[125:137]
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_header_value with data[139:149]
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:16:00,003 - multipart.multipart - DEBUG - Calling on_part_data with data[153:46897]
+2025-12-23 13:16:00,004 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,004 - multipart.multipart - DEBUG - Calling on_part_data with data[46898:65536]
+2025-12-23 13:16:00,012 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:16:00,012 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:16:00,013 - multipart.multipart - DEBUG - Calling on_part_data with data[0:5684]
+2025-12-23 13:16:00,013 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,013 - multipart.multipart - DEBUG - Calling on_part_data with data[5685:32768]
+2025-12-23 13:16:00,014 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:16:00,014 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:16:00,015 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16384]
+2025-12-23 13:16:00,015 - multipart.multipart - DEBUG - Calling on_part_data with data[0:11619]
+2025-12-23 13:16:00,015 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[11620:16384]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[0:37589]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[37590:81920]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[0:47559]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[47560:65536]
+2025-12-23 13:16:00,016 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1599]
+2025-12-23 13:16:00,018 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,018 - multipart.multipart - DEBUG - Calling on_part_data with data[1600:50475]
+2025-12-23 13:16:00,018 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,018 - multipart.multipart - DEBUG - Calling on_part_data with data[50476:65536]
+2025-12-23 13:16:00,018 - multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-12-23 13:16:00,019 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49152]
+2025-12-23 13:16:00,019 - multipart.multipart - DEBUG - Calling on_part_data with data[0:11031]
+2025-12-23 13:16:00,019 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,020 - multipart.multipart - DEBUG - Calling on_part_data with data[11032:16384]
+2025-12-23 13:16:00,020 - multipart.multipart - DEBUG - Calling on_part_data with data[0:49143]
+2025-12-23 13:16:00,020 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,020 - multipart.multipart - DEBUG - Calling on_part_data with data[49144:49152]
+2025-12-23 13:16:00,020 - multipart.multipart - DEBUG - Calling on_part_data with data[0:32768]
+2025-12-23 13:16:00,021 - multipart.multipart - DEBUG - Calling on_part_data with data[0:13142]
+2025-12-23 13:16:00,021 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,021 - multipart.multipart - DEBUG - Calling on_part_data with data[13143:32768]
+2025-12-23 13:16:00,021 - multipart.multipart - DEBUG - Calling on_part_data with data[0:4765]
+2025-12-23 13:16:00,021 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,022 - multipart.multipart - DEBUG - Calling on_part_data with data[4766:32768]
+2025-12-23 13:16:00,022 - multipart.multipart - DEBUG - Calling on_part_data with data[0:81920]
+2025-12-23 13:16:00,022 - multipart.multipart - DEBUG - Calling on_part_data with data[0:16700]
+2025-12-23 13:16:00,022 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[16701:55535]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[55536:85871]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[0:1]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[85872:98709]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_begin with no data
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_header_field with data[98753:98772]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_header_value with data[98774:98804]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_header_end with no data
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_headers_finished with no data
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_data with data[98808:98816]
+2025-12-23 13:16:00,023 - multipart.multipart - DEBUG - Calling on_part_end with no data
+2025-12-23 13:16:00,024 - multipart.multipart - DEBUG - Calling on_end with no data
+2025-12-23 13:16:00,089 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-12-23 13:16:00,090 - sqlalchemy.engine.Engine - INFO - SELECT staff_users.id, staff_users.username, staff_users.email, staff_users.hashed_password, staff_users.full_name, staff_users.role, staff_users.is_active, staff_users.created_at, staff_users.last_login_at 
+FROM staff_users 
+WHERE staff_users.id = $1::INTEGER
+2025-12-23 13:16:00,091 - sqlalchemy.engine.Engine - INFO - [generated in 0.00078s] (1,)
+2025-12-23 13:16:00,096 - app.services.file_processor - INFO - Parsed filename (strict): 212223240169, 19AI405
+2025-12-23 13:16:00,100 - app.services.file_processor - INFO - Saved file: ./uploads\pending\6319af54aec14c0ea55fdcca0601b72a.jpg (hash: 3a00d46e79102899...)
+2025-12-23 13:16:00,102 - sqlalchemy.engine.Engine - INFO - SELECT examination_artifacts.id, examination_artifacts.artifact_uuid, examination_artifacts.raw_filename, examination_artifacts.original_filename, examination_artifacts.parsed_reg_no, examination_artifacts.parsed_subject_code, examination_artifacts.file_blob_path, examination_artifacts.file_hash, examination_artifacts.file_size_bytes, examination_artifacts.mime_type, examination_artifacts.moodle_user_id, examination_artifacts.moodle_username, examination_artifacts.moodle_course_id, examination_artifacts.moodle_assignment_id, examination_artifacts.workflow_status, examination_artifacts.moodle_draft_item_id, examination_artifacts.moodle_submission_id, examination_artifacts.lms_transaction_id, examination_artifacts.transaction_id, examination_artifacts.uploaded_at, examination_artifacts.validated_at, examination_artifacts.submit_timestamp, examination_artifacts.completed_at, examination_artifacts.uploaded_by_staff_id, examination_artifacts.submitted_by_user_id, examination_artifacts.transaction_log, examination_artifacts.error_message, examination_artifacts.retry_count 
+FROM examination_artifacts 
+WHERE examination_artifacts.transaction_id = $1::VARCHAR
+2025-12-23 13:16:00,103 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] ('6363709433549754e2ca1e8b2598b80e',)
+2025-12-23 13:16:00,133 - app.services.artifact_service - WARNING - Duplicate artifact detected: 6363709433549754e2ca1e8b2598b80e
+2025-12-23 13:16:00,135 - sqlalchemy.engine.Engine - INFO - INSERT INTO audit_logs (action, action_category, description, actor_type, actor_id, actor_username, actor_ip, artifact_id, target_type, target_id, request_data, response_data, moodle_api_function, moodle_response_code) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::INTEGER, $9::VARCHAR, $10::VARCHAR, $11::JSONB, $12::JSONB, $13::VARCHAR, $14::INTEGER) RETURNING audit_logs.id, audit_logs.created_at
+2025-12-23 13:16:00,136 - sqlalchemy.engine.Engine - INFO - [generated in 0.00091s] ('bulk_upload', 'upload', 'Bulk upload: 1 successful, 0 failed', 'staff', '1', 'admin', '127.0.0.1', None, None, None, '{"total": 1, "successful": 1, "failed": 0}', 'null', None, None)
+2025-12-23 13:16:00,142 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-12-23 13:16:27,271 - app.api.routes.auth - INFO - Authenticating student: student1
+2025-12-23 13:16:27,574 - app.services.moodle_client - INFO - Authenticating user: student1
+2025-12-23 13:16:27,575 - httpcore.connection - DEBUG - connect_tcp.started host='1844fdb23815.ngrok-free.app' port=443 local_address=None timeout=30.0 socket_options=None
+2025-12-23 13:16:27,628 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E32AFD0>
+2025-12-23 13:16:27,628 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002AB0E45B800> server_hostname='1844fdb23815.ngrok-free.app' timeout=30.0
+2025-12-23 13:16:27,672 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E42EC50>
+2025-12-23 13:16:27,673 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:27,673 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-23 13:16:27,673 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-23 13:16:27,673 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-23 13:16:27,673 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:27,708 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Connection', b'close'), (b'Content-Type', b'text/plain'), (b'Ngrok-Error-Code', b'ERR_NGROK_3200'), (b'Date', b'Tue, 23 Dec 2025 07:46:27 GMT'), (b'Content-Length', b'72')])
+2025-12-23 13:16:27,709 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-23 13:16:27,709 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-23 13:16:27,709 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-23 13:16:27,709 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-23 13:16:27,710 - app.services.moodle_client - ERROR - HTTP error during authentication: Client error '404 Not Found' for url 'https://1844fdb23815.ngrok-free.app/login/token.php'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-12-23 13:16:27,710 - app.api.routes.auth - WARNING - Moodle authentication failed for student1: HTTP error: 404
+2025-12-23 13:16:27,710 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:16:42,194 - app.api.routes.auth - INFO - Authenticating student: 23004568
+2025-12-23 13:16:42,444 - app.services.moodle_client - INFO - Authenticating user: 23004568
+2025-12-23 13:16:42,445 - httpcore.connection - DEBUG - connect_tcp.started host='1844fdb23815.ngrok-free.app' port=443 local_address=None timeout=30.0 socket_options=None
+2025-12-23 13:16:42,491 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E529590>
+2025-12-23 13:16:42,492 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002AB0E4BC5F0> server_hostname='1844fdb23815.ngrok-free.app' timeout=30.0
+2025-12-23 13:16:42,530 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E5294D0>
+2025-12-23 13:16:42,531 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:42,532 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-23 13:16:42,532 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-23 13:16:42,533 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-23 13:16:42,533 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:42,568 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Connection', b'close'), (b'Content-Type', b'text/plain'), (b'Ngrok-Error-Code', b'ERR_NGROK_3200'), (b'Date', b'Tue, 23 Dec 2025 07:46:42 GMT'), (b'Content-Length', b'72')])
+2025-12-23 13:16:42,569 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-23 13:16:42,569 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-23 13:16:42,569 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-23 13:16:42,570 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-23 13:16:42,570 - app.services.moodle_client - ERROR - HTTP error during authentication: Client error '404 Not Found' for url 'https://1844fdb23815.ngrok-free.app/login/token.php'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-12-23 13:16:42,570 - app.api.routes.auth - WARNING - Moodle authentication failed for 23004568: HTTP error: 404
+2025-12-23 13:16:42,570 - app.db.database - ERROR - Database session error: 
+2025-12-23 13:16:54,545 - app.api.routes.auth - INFO - Authenticating student: 23004568
+2025-12-23 13:16:54,741 - app.services.moodle_client - INFO - Authenticating user: 23004568
+2025-12-23 13:16:54,741 - httpcore.connection - DEBUG - connect_tcp.started host='1844fdb23815.ngrok-free.app' port=443 local_address=None timeout=30.0 socket_options=None
+2025-12-23 13:16:54,779 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E4FF610>
+2025-12-23 13:16:54,780 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002AB0E45B800> server_hostname='1844fdb23815.ngrok-free.app' timeout=30.0
+2025-12-23 13:16:54,815 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000002AB0E49D6D0>
+2025-12-23 13:16:54,816 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:54,816 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-12-23 13:16:54,816 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-12-23 13:16:54,816 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-12-23 13:16:54,816 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-12-23 13:16:54,849 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Connection', b'close'), (b'Content-Type', b'text/plain'), (b'Ngrok-Error-Code', b'ERR_NGROK_3200'), (b'Date', b'Tue, 23 Dec 2025 07:46:54 GMT'), (b'Content-Length', b'72')])
+2025-12-23 13:16:54,849 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-12-23 13:16:54,849 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-12-23 13:16:54,849 - httpcore.http11 - DEBUG - response_closed.started
+2025-12-23 13:16:54,849 - httpcore.http11 - DEBUG - response_closed.complete
+2025-12-23 13:16:54,850 - app.services.moodle_client - ERROR - HTTP error during authentication: Client error '404 Not Found' for url 'https://1844fdb23815.ngrok-free.app/login/token.php'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-12-23 13:16:54,850 - app.api.routes.auth - WARNING - Moodle authentication failed for 23004568: HTTP error: 404
+2025-12-23 13:16:54,850 - app.db.database - ERROR - Database session error: 
+2025-12-23 20:53:48,009 - app.main - INFO - Shutting down Examination Middleware...
+2025-12-23 20:53:48,010 - app.main - INFO - Database connections closed

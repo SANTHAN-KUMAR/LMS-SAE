@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     redis_url: Optional[str] = None
     
     # Moodle
-    moodle_base_url: str = Field(default="https://1844fdb23815.ngrok-free.app")
+    moodle_base_url: str = Field(default="https://9efc3d61012d.ngrok-free.app")
     moodle_ws_endpoint: str = Field(default="/webservice/rest/server.php")
     moodle_upload_endpoint: str = Field(default="/webservice/upload.php")
     moodle_token_endpoint: str = Field(default="/login/token.php")
