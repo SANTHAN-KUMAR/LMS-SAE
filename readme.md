@@ -389,10 +389,6 @@ Check file size limits in Moodle
 Verify assignment allows file submissions
 ```
 
-## 📄 License
-
-Not Licensed Yet.
-
 ## 🤝 Contributing
 
 1. Fork the repository
