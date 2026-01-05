@@ -22,7 +22,9 @@ from app.schemas import (
 )
 from app.services.artifact_service import ArtifactService, SubjectMappingService, AuditService
 from app.services.submission_service import SubmissionService
+from app.services.subject_discovery_service import SubjectDiscoveryService
 from app.api.routes.auth import get_current_student_session, get_decrypted_token
+from app.core.security import token_encryption
 
 logger = logging.getLogger(__name__)
 
@@ -53,6 +55,16 @@ async def get_dashboard(
     """
     artifact_service = ArtifactService(db)
     mapping_service = SubjectMappingService(db)
+    discovery_service = SubjectDiscoveryService(db)  # For dynamic discovery
+    
+    # Get user's Moodle token for dynamic discovery
+    user_token = None
+    try:
+        user_token = token_encryption.decrypt(session.encrypted_token)  # Fixed: was encrypted_moodle_token
+        logger.info(f"[Dashboard] Decrypted user token for dynamic discovery (length: {len(user_token) if user_token else 0})")
+    except Exception as e:
+        logger.warning(f"[Dashboard] Failed to decrypt Moodle token: {e}")
+        user_token = None  # Fallback to DB/config only
     
     # Extract register number from fullname (format: "Name 212222020029")
     import re
@@ -82,8 +94,11 @@ async def get_dashboard(
         if artifact.parsed_subject_code:
             mapping = await mapping_service.get_mapping(artifact.parsed_subject_code)
         
-        # Check if we have a valid assignment mapping
-        assignment_id = await mapping_service.get_assignment_id(artifact.parsed_subject_code) if artifact.parsed_subject_code else None
+        # Check if we have a valid assignment mapping (now with dynamic discovery!)
+        assignment_id = await discovery_service.get_assignment_id(
+            artifact.parsed_subject_code,
+            user_token=user_token
+        ) if artifact.parsed_subject_code else None
         
         pending_papers.append(StudentPendingPaper(
             artifact_uuid=str(artifact.artifact_uuid),

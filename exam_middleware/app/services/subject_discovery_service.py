@@ -88,6 +88,7 @@ class SubjectDiscoveryService:
         
         # Layer 3: Dynamic Moodle discovery (if token available)
         if user_token:
+            logger.info(f"[Layer 3] Attempting Moodle discovery for {subject_code} with token...")
             discovered = await self._discover_from_moodle(subject_code, user_token)
             if discovered:
                 # Persist to database for future lookups
@@ -101,8 +102,13 @@ class SubjectDiscoveryService:
                 await subject_cache.set(cache_key, discovered)
                 logger.info(f"[Moodle DISCOVERY] {subject_code} -> {discovered.get('assignment_id')}")
                 return discovered
+            else:
+                logger.warning(f"[Layer 3] Moodle discovery returned nothing for {subject_code}")
+        else:
+            logger.warning(f"[Layer 3] SKIPPED - No user token available for {subject_code}")
         
         # Layer 4: Fallback to config
+        logger.info(f"[Layer 4] Checking config fallback for {subject_code}")
         config_mapping = await self._get_from_config(subject_code)
         if config_mapping:
             # Save to DB for future (so we don't hit config every time)
@@ -117,7 +123,7 @@ class SubjectDiscoveryService:
             logger.info(f"[Config FALLBACK] {subject_code} -> {config_mapping.get('assignment_id')}")
             return config_mapping
         
-        logger.warning(f"[NOT FOUND] No mapping found for subject code: {subject_code}")
+        logger.error(f"[NOT FOUND] No mapping found for subject code: {subject_code} after checking ALL layers")
         return None
     
     async def get_assignment_id(
@@ -152,10 +158,11 @@ class SubjectDiscoveryService:
     async def _discover_from_moodle(
         self,
         subject_code: str,
-        token: str
+        token: str,
+        max_retries: int = 3
     ) -> Optional[Dict[str, Any]]:
         """
-        Dynamically discover assignment from Moodle API.
+        Dynamically discover assignment from Moodle API with retry logic.
         
         Strategy:
         1. Get all courses the user is enrolled in
@@ -166,97 +173,146 @@ class SubjectDiscoveryService:
         Args:
             subject_code: Subject code to find
             token: User's Moodle token
+            max_retries: Number of retry attempts for network errors
             
         Returns:
             Discovery result dict or None
         """
-        client = MoodleClient(token=token)
+        import asyncio
         
-        try:
-            # Get user info and courses
-            site_info = await client.get_site_info(token=token)
-            user_id = site_info.get("userid")
+        last_error = None
+        
+        for attempt in range(max_retries):
+            client = MoodleClient(token=token)
             
-            if not user_id:
-                logger.warning("Could not get user ID from Moodle")
-                return None
-            
-            # Get user's enrolled courses
-            courses = await client.get_user_courses(user_id=user_id, token=token)
-            
-            if not courses:
-                logger.debug(f"No courses found for user {user_id}")
-                return None
-            
-            # First pass: Find courses matching the subject code
-            matching_course_ids = []
-            for course in courses:
-                course_shortname = (course.get("shortname") or "").upper()
-                course_idnumber = (course.get("idnumber") or "").upper()
-                course_fullname = (course.get("fullname") or "").upper()
+            try:
+                if attempt > 0:
+                    wait_time = 2 ** attempt  # Exponential backoff: 2, 4 seconds
+                    logger.info(f"[Discovery] Retry attempt {attempt + 1}/{max_retries} after {wait_time}s wait...")
+                    await asyncio.sleep(wait_time)
                 
-                if (subject_code in course_shortname or 
-                    subject_code in course_idnumber or
-                    subject_code in course_fullname):
-                    matching_course_ids.append(course.get("id"))
-                    logger.debug(f"Course match: {course.get('shortname')} (ID: {course.get('id')})")
-            
-            # If no direct course match, check all courses for assignment name matches
-            if not matching_course_ids:
-                matching_course_ids = [c.get("id") for c in courses if c.get("id")]
-            
-            if not matching_course_ids:
-                return None
-            
-            # Get assignments for matching/all courses
-            assignments_result = await client.get_assignments(
-                course_ids=matching_course_ids,
-                token=token
-            )
-            
-            courses_with_assignments = assignments_result.get("courses", [])
-            
-            # Search for assignment matching subject code
-            for course_data in courses_with_assignments:
-                course_id = course_data.get("id")
-                course_shortname = (course_data.get("shortname") or "").upper()
-                course_idnumber = (course_data.get("idnumber") or "").upper()
+                logger.info(f"[Discovery] Starting Moodle discovery for subject: {subject_code}")
                 
-                # Check if this course matches the subject code
-                course_matches = (
-                    subject_code in course_shortname or 
-                    subject_code in course_idnumber
+                # Get user info and courses
+                site_info = await client.get_site_info(token=token)
+                user_id = site_info.get("userid")
+                
+                logger.info(f"[Discovery] User ID: {user_id}, Username: {site_info.get('username')}")
+                
+                if not user_id:
+                    logger.warning("[Discovery] Could not get user ID from Moodle")
+                    return None
+                
+                # Get all courses (MoodleClient uses get_courses, not get_user_courses)
+                courses = await client.get_courses(token=token)
+                
+                logger.info(f"[Discovery] Found {len(courses) if courses else 0} courses for user")
+                
+                if not courses:
+                    logger.debug(f"[Discovery] No courses found for user {user_id}")
+                    return None
+                
+                # Log all courses for debugging
+                for course in courses:
+                    logger.debug(f"[Discovery] Course: ID={course.get('id')}, "
+                               f"shortname='{course.get('shortname')}', "
+                               f"fullname='{course.get('fullname')}'")
+                
+                # First pass: Find courses matching the subject code
+                matching_course_ids = []
+                for course in courses:
+                    course_shortname = (course.get("shortname") or "").upper()
+                    course_idnumber = (course.get("idnumber") or "").upper()
+                    course_fullname = (course.get("fullname") or "").upper()
+                    
+                    if (subject_code in course_shortname or 
+                        subject_code in course_idnumber or
+                        subject_code in course_fullname):
+                        matching_course_ids.append(course.get("id"))
+                        logger.info(f"[Discovery] Course MATCH: {course.get('shortname')} (ID: {course.get('id')})")
+                
+                # If no direct course match, search ALL courses for assignment matches
+                if not matching_course_ids:
+                    logger.info(f"[Discovery] No direct course match for {subject_code}, checking all courses for assignments")
+                    matching_course_ids = [c.get("id") for c in courses if c.get("id")]
+                
+                if not matching_course_ids:
+                    logger.warning("[Discovery] No course IDs to search")
+                    return None
+                
+                logger.info(f"[Discovery] Fetching assignments from {len(matching_course_ids)} courses")
+                
+                # Get assignments for matching/all courses
+                assignments_result = await client.get_assignments(
+                    course_ids=matching_course_ids,
+                    token=token
                 )
                 
-                for assignment in course_data.get("assignments", []):
-                    assignment_name = (assignment.get("name") or "").upper()
-                    assignment_id = assignment.get("id")
+                courses_with_assignments = assignments_result.get("courses", [])
+                logger.info(f"[Discovery] Got assignments from {len(courses_with_assignments)} courses")
+                
+                # Search for assignment matching subject code
+                all_assignments = []
+                for course_data in courses_with_assignments:
+                    course_id = course_data.get("id")
+                    course_shortname = (course_data.get("shortname") or "").upper()
+                    course_idnumber = (course_data.get("idnumber") or "").upper()
                     
-                    # Match if: course matches OR assignment name contains subject code
-                    if course_matches or subject_code in assignment_name:
-                        logger.info(
-                            f"Discovered: {subject_code} -> "
-                            f"Course {course_id}, Assignment {assignment_id} "
-                            f"({assignment.get('name')})"
-                        )
-                        return {
+                    # Check if this course matches the subject code
+                    course_matches = (
+                        subject_code in course_shortname or 
+                        subject_code in course_idnumber
+                    )
+                    
+                    for assignment in course_data.get("assignments", []):
+                        assignment_name = (assignment.get("name") or "").upper()
+                        assignment_id = assignment.get("id")
+                        
+                        all_assignments.append({
                             "course_id": course_id,
+                            "course_shortname": course_shortname,
                             "assignment_id": assignment_id,
-                            "assignment_name": assignment.get("name"),
-                            "source": "moodle_discovery"
-                        }
-            
-            logger.debug(f"No matching assignment found in Moodle for {subject_code}")
-            return None
-            
-        except MoodleAPIError as e:
-            logger.warning(f"Moodle API error during discovery for {subject_code}: {e}")
-            return None
-        except Exception as e:
-            logger.error(f"Unexpected error during Moodle discovery: {e}")
-            return None
-        finally:
-            await client.close()
+                            "assignment_name": assignment.get("name")
+                        })
+                        
+                        logger.debug(f"[Discovery] Assignment: ID={assignment_id}, "
+                                   f"name='{assignment.get('name')}', course='{course_shortname}'")
+                        
+                        # Match if: course matches OR assignment name contains subject code
+                        if course_matches or subject_code in assignment_name:
+                            logger.info(
+                                f"[Discovery] ✓ FOUND MATCH: {subject_code} -> "
+                                f"Course {course_id}, Assignment {assignment_id} "
+                                f"({assignment.get('name')})"
+                            )
+                            return {
+                                "course_id": course_id,
+                                "assignment_id": assignment_id,
+                                "assignment_name": assignment.get("name"),
+                                "source": "moodle_discovery"
+                            }
+                
+                # Log what we found for debugging
+                logger.warning(f"[Discovery] ✗ No match for '{subject_code}' in {len(all_assignments)} assignments")
+                logger.info(f"[Discovery] Available assignments: {[a['assignment_name'] for a in all_assignments[:10]]}")
+                
+                return None
+                
+            except MoodleAPIError as e:
+                logger.warning(f"[Discovery] Moodle API error for {subject_code}: {e}")
+                last_error = e
+                # Don't retry on API errors
+                return None
+            except Exception as e:
+                last_error = e
+                logger.warning(f"[Discovery] Network error (attempt {attempt + 1}/{max_retries}): {e}")
+                # Retry on network errors
+                if attempt == max_retries - 1:
+                    logger.error(f"[Discovery] All retry attempts failed for {subject_code}")
+            finally:
+                await client.close()
+        
+        return None
     
     async def _get_from_config(self, subject_code: str) -> Optional[Dict[str, Any]]:
         """Get from hardcoded config as last resort."""
