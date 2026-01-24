@@ -22,34 +22,6 @@ In academic institutions transitioning to digital grading, handling physical ans
 
 This middleware solves these issues by decoupling the **scanning/uploading** process from the **submission** process, introducing a secure validation layer.
 
-## OD Approval sys design (Irrelevant)
-```mermaid
-graph TD
-    User -->|HTTPS/PWA| CF
-    CF -->|Static Assets| Next
-    CF -->|API Requests| Supabase
-    
-    subgraph "Supabase Ecosystem"
-        Auth
-        DB
-        Storage
-        Realtime
-        Edge[Edge Functions]
-        
-        Auth -->|JWT| DB
-        Next -->|Transaction Pool 6543| DB
-        DB -->|RLS Policies| DB
-        
-        DB -->|pg_cron| DB
-        DB -->|Webhooks| Edge
-        
-        Edge -->|Resize/Strip Metadata| Storage
-    end
-    
-    User -->|Offline Write| IDB
-    IDB -->|Background Sync| Next
-```
-
 ### Core Concept
 The system utilizes a **3-Step "Upload-Verify-Push" Workflow**:
 1.  **Bulk Ingestion**: Administrative staff upload bulk batches of scanned PDF/Images.
