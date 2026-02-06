@@ -20,8 +20,7 @@ jobs:
             cd ~/app
             git pull origin main
             
-            # 2. Fix permissions for uploads (Force Create & Unlock)
-            mkdir -p uploads
+            # 2. Fix permissions for uploads (just in case)
             sudo chmod -R 777 uploads
 
             # 3. Rebuild the Docker Image
