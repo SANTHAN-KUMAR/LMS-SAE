@@ -1,0 +1,2906 @@
+ubuntu@ip-172-31-44-145:~$ docker logs exam-server
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:11,122 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:12,993 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:15,013 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:17,519 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:19,393 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:21,408 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:23,985 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:25,866 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:27,881 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:30,637 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:32,511 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:34,520 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:37,689 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:39,585 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:41,612 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:45,567 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:47,444 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:49,459 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:52:55,004 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:52:56,899 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:52:58,918 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:53:07,708 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:53:09,610 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:53:11,634 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:53:26,783 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:53:28,658 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:53:30,667 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:53:58,626 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:54:00,593 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:54:03,222 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:54:56,835 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:54:58,695 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:55:00,815 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+================================================
+  LMS-SAE Examination Middleware
+  Starting up...
+================================================
+Waiting for database...
+Database is ready!
+Initializing database...
+2026-02-06 16:56:03,692 - asyncio - DEBUG - Using selector: EpollSelector
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/db/database.py", line 69, in init_db
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Database initialization skipped (may already exist)
+Checking for initial data...
+2026-02-06 16:56:05,583 - asyncio - DEBUG - Using selector: EpollSelector
+============================================================
+  Examination Middleware - Database Initialization
+============================================================
+
+Creating database tables...
+Traceback (most recent call last):
+  File "/app/init_db.py", line 216, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/init_db.py", line 185, in main
+    await create_tables()
+  File "/app/init_db.py", line 26, in create_tables
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+Initial data setup skipped (may already exist)
+================================================
+  Startup complete! Starting server...
+================================================
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+2026-02-06 16:56:07,588 - app.main - INFO - Starting Examination Middleware...
+ERROR:    Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 55, in lifespan
+    async with engine.begin() as conn:
+  File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1061, in begin
+    async with conn:
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/base.py", line 125, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 179, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3268, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3292, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 716, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 167, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 678, in __init__
+    self.__connect()
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 936, in connect
+    await_only(creator_fn(*arg, **kw)),
+               ^^^^^^^^^^^^^^^^^^^^^^
+TypeError: connect() got an unexpected keyword argument 'sslmode'
+
+ERROR:    Application startup failed. Exiting.
+ubuntu@ip-172-31-44-145:~$
