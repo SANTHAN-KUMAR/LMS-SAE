@@ -15,6 +15,7 @@ psycopg2-binary==2.9.9
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 cryptography==41.0.7
+PyJWT>=2.8.0
 
 # HTTP Client
 httpx==0.25.2

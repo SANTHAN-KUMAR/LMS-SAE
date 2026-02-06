@@ -39,5 +39,6 @@ jobs:
           TESTING: "true"
           DATABASE_URL: "sqlite+aiosqlite:///:memory:"
           SECRET_KEY: "test-secret"
+          PYTHONPATH: ${{ github.workspace }}/exam_middleware
         run: |
           pytest -v
