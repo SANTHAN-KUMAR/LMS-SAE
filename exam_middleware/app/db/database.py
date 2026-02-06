@@ -15,9 +15,32 @@ logger = logging.getLogger(__name__)
 # Create async engine with proper connection pooling
 # Note: Previously used NullPool which created a new connection for every request
 # causing performance issues and potential connection exhaustion under load
+# Handle SSL configuration for asyncpg
+# asyncpg doesn't support 'sslmode' in the connection string, we must pass it via connect_args
+database_url = settings.database_url_computed
+connect_args = {}
+
+if "sslmode=" in database_url:
+    # Force SSL for Neon/Cloud Postgres
+    connect_args["ssl"] = "require"
+    
+    # Remove incompatible parameters
+    database_url = database_url.replace("sslmode=require", "")
+    database_url = database_url.replace("sslmode=verify-full", "")
+    database_url = database_url.replace("sslmode=prefer", "")
+    
+    # Clean up URL
+    database_url = database_url.replace("?&", "?").replace("&&", "&")
+    if database_url.endswith("?") or database_url.endswith("&"):
+        database_url = database_url.rstrip("?&")
+
+# Create async engine with proper connection pooling
+# Note: Previously used NullPool which created a new connection for every request
+# causing performance issues and potential connection exhaustion under load
 engine = create_async_engine(
-    settings.database_url_computed,
+    database_url,
     echo=settings.debug,
+    connect_args=connect_args,
     
     # Use proper connection pooling for production
     poolclass=AsyncAdaptedQueuePool,
