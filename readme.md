@@ -1,5 +1,5 @@
 #  Examination Middleware (LMS-SAE Bridge)
-
+[![Deploy to AWS EC2](https://github.com/SANTHAN-KUMAR/LMS-SAE/actions/workflows/deploy.yml/badge.svg)](https://github.com/SANTHAN-KUMAR/LMS-SAE/actions/workflows/deploy.yml)
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-336791.svg)
