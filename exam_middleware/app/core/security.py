@@ -89,9 +89,17 @@ def get_password_hash(password: str) -> str:
     return hashed.decode('utf-8')
 
 
-def generate_token_key() -> str:
-    """Generate a secure random token key"""
-    return secrets.token_urlsafe(32)
+def generate_secure_key(length: int = 32) -> str:
+    """
+    Generate a secure random key
+    
+    Args:
+        length: Length of the key in bytes (default 32)
+        
+    Returns:
+        URL-safe string representation of the key
+    """
+    return secrets.token_urlsafe(length)
 
 
 class TokenEncryption:
