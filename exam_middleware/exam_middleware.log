@@ -2794,3 +2794,264 @@ WHERE subject_mappings.subject_code = $1::VARCHAR AND subject_mappings.is_active
 2026-02-04 22:53:25,703 - app.db.database - ERROR - Database session error: [{'type': 'missing', 'loc': ('header', 'X-Session-ID'), 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
 2026-02-04 22:54:26,948 - app.main - INFO - Shutting down Examination Middleware...
 2026-02-04 22:54:26,952 - app.main - INFO - Database connections closed
+2026-02-06 13:15:55,414 - asyncio - DEBUG - Using selector: EpollSelector
+2026-02-06 13:17:09,245 - asyncio - DEBUG - Using selector: EpollSelector
+2026-02-06 13:17:10,669 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2026-02-06 13:17:10,670 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-06 13:17:10,929 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2026-02-06 13:17:10,930 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-06 13:17:11,183 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2026-02-06 13:17:11,183 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-06 13:17:11,400 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:11,406 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,415 - sqlalchemy.engine.Engine - INFO - [generated in 0.00959s] ('examination_artifacts', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:11,712 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,712 - sqlalchemy.engine.Engine - INFO - [cached since 0.3068s ago] ('subject_mappings', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:11,792 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,793 - sqlalchemy.engine.Engine - INFO - [cached since 0.3873s ago] ('staff_users', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:11,853 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,854 - sqlalchemy.engine.Engine - INFO - [cached since 0.4479s ago] ('student_sessions', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:11,932 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,933 - sqlalchemy.engine.Engine - INFO - [cached since 0.5272s ago] ('audit_logs', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:11,998 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:11,999 - sqlalchemy.engine.Engine - INFO - [cached since 0.5932s ago] ('submission_queue', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:12,083 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2026-02-06 13:17:12,083 - sqlalchemy.engine.Engine - INFO - [cached since 0.6776s ago] ('system_config', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2026-02-06 13:17:12,145 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = $1::VARCHAR AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != $2::VARCHAR
+2026-02-06 13:17:12,146 - sqlalchemy.engine.Engine - INFO - [generated in 0.00090s] ('workflowstatus', 'pg_catalog')
+2026-02-06 13:17:12,313 - sqlalchemy.engine.Engine - INFO - CREATE TYPE workflowstatus AS ENUM ('PENDING', 'PENDING_REVIEW', 'VALIDATED', 'READY_FOR_REVIEW', 'LOCKED_BY_USER', 'UPLOADING', 'SUBMITTING', 'SUBMITTED_TO_LMS', 'COMPLETED', 'FAILED', 'QUEUED')
+2026-02-06 13:17:12,314 - sqlalchemy.engine.Engine - INFO - [no key 0.00059s] ()
+2026-02-06 13:17:12,493 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE subject_mappings (
+	id SERIAL NOT NULL, 
+	subject_code VARCHAR(20) NOT NULL, 
+	subject_name VARCHAR(255), 
+	moodle_course_id INTEGER NOT NULL, 
+	moodle_course_idnumber VARCHAR(50), 
+	moodle_assignment_id INTEGER NOT NULL, 
+	moodle_assignment_name VARCHAR(255), 
+	exam_session VARCHAR(50), 
+	is_active BOOLEAN, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	last_verified_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id)
+)
+
+
+2026-02-06 13:17:12,493 - sqlalchemy.engine.Engine - INFO - [no key 0.00059s] ()
+2026-02-06 13:17:12,654 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_subject_mappings_subject_code ON subject_mappings (subject_code)
+2026-02-06 13:17:12,655 - sqlalchemy.engine.Engine - INFO - [no key 0.00092s] ()
+2026-02-06 13:17:12,787 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE staff_users (
+	id SERIAL NOT NULL, 
+	username VARCHAR(100) NOT NULL, 
+	email VARCHAR(255) NOT NULL, 
+	hashed_password VARCHAR(255) NOT NULL, 
+	full_name VARCHAR(255), 
+	role VARCHAR(50), 
+	is_active BOOLEAN, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	last_login_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (email)
+)
+
+
+2026-02-06 13:17:12,788 - sqlalchemy.engine.Engine - INFO - [no key 0.00050s] ()
+2026-02-06 13:17:12,917 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_staff_users_username ON staff_users (username)
+2026-02-06 13:17:12,917 - sqlalchemy.engine.Engine - INFO - [no key 0.00074s] ()
+2026-02-06 13:17:13,050 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE student_sessions (
+	id SERIAL NOT NULL, 
+	session_id VARCHAR(64) NOT NULL, 
+	moodle_user_id BIGINT NOT NULL, 
+	moodle_username VARCHAR(100) NOT NULL, 
+	moodle_fullname VARCHAR(255), 
+	encrypted_token TEXT NOT NULL, 
+	token_expires_at TIMESTAMP WITH TIME ZONE, 
+	ip_address VARCHAR(45), 
+	user_agent VARCHAR(500), 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	last_activity_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	expires_at TIMESTAMP WITH TIME ZONE NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2026-02-06 13:17:13,051 - sqlalchemy.engine.Engine - INFO - [no key 0.00048s] ()
+2026-02-06 13:17:13,211 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_session_expires ON student_sessions (expires_at)
+2026-02-06 13:17:13,212 - sqlalchemy.engine.Engine - INFO - [no key 0.00077s] ()
+2026-02-06 13:17:13,350 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_student_sessions_session_id ON student_sessions (session_id)
+2026-02-06 13:17:13,351 - sqlalchemy.engine.Engine - INFO - [no key 0.00085s] ()
+2026-02-06 13:17:13,488 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE system_config (
+	id SERIAL NOT NULL, 
+	key VARCHAR(100) NOT NULL, 
+	value TEXT, 
+	value_type VARCHAR(20), 
+	description TEXT, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (key)
+)
+
+
+2026-02-06 13:17:13,489 - sqlalchemy.engine.Engine - INFO - [no key 0.00086s] ()
+2026-02-06 13:17:13,655 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE examination_artifacts (
+	id SERIAL NOT NULL, 
+	artifact_uuid UUID NOT NULL, 
+	raw_filename VARCHAR(255) NOT NULL, 
+	original_filename VARCHAR(255) NOT NULL, 
+	parsed_reg_no VARCHAR(20), 
+	parsed_subject_code VARCHAR(20), 
+	file_blob_path VARCHAR(512) NOT NULL, 
+	file_hash VARCHAR(64) NOT NULL, 
+	file_size_bytes BIGINT, 
+	mime_type VARCHAR(100), 
+	moodle_user_id BIGINT, 
+	moodle_username VARCHAR(100), 
+	moodle_course_id INTEGER, 
+	moodle_assignment_id INTEGER, 
+	workflow_status workflowstatus NOT NULL, 
+	moodle_draft_item_id BIGINT, 
+	moodle_submission_id VARCHAR(100), 
+	lms_transaction_id VARCHAR(100), 
+	transaction_id VARCHAR(64), 
+	uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	validated_at TIMESTAMP WITH TIME ZONE, 
+	submit_timestamp TIMESTAMP WITH TIME ZONE, 
+	completed_at TIMESTAMP WITH TIME ZONE, 
+	uploaded_by_staff_id INTEGER, 
+	submitted_by_user_id BIGINT, 
+	transaction_log JSONB, 
+	error_message TEXT, 
+	retry_count INTEGER, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uq_paper_submission UNIQUE (parsed_reg_no, parsed_subject_code), 
+	UNIQUE (artifact_uuid), 
+	UNIQUE (transaction_id), 
+	FOREIGN KEY(uploaded_by_staff_id) REFERENCES staff_users (id)
+)
+
+
+2026-02-06 13:17:13,656 - sqlalchemy.engine.Engine - INFO - [no key 0.00091s] ()
+2026-02-06 13:17:13,804 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_examination_artifacts_parsed_reg_no ON examination_artifacts (parsed_reg_no)
+2026-02-06 13:17:13,804 - sqlalchemy.engine.Engine - INFO - [no key 0.00075s] ()
+2026-02-06 13:17:13,926 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_artifacts_status ON examination_artifacts (workflow_status)
+2026-02-06 13:17:13,927 - sqlalchemy.engine.Engine - INFO - [no key 0.00080s] ()
+2026-02-06 13:17:14,052 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_artifacts_reg_subject ON examination_artifacts (parsed_reg_no, parsed_subject_code)
+2026-02-06 13:17:14,053 - sqlalchemy.engine.Engine - INFO - [no key 0.00054s] ()
+2026-02-06 13:17:14,189 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_examination_artifacts_parsed_subject_code ON examination_artifacts (parsed_subject_code)
+2026-02-06 13:17:14,190 - sqlalchemy.engine.Engine - INFO - [no key 0.00067s] ()
+2026-02-06 13:17:14,349 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE audit_logs (
+	id SERIAL NOT NULL, 
+	action VARCHAR(100) NOT NULL, 
+	action_category VARCHAR(50) NOT NULL, 
+	description TEXT, 
+	actor_type VARCHAR(20) NOT NULL, 
+	actor_id VARCHAR(100), 
+	actor_username VARCHAR(100), 
+	actor_ip VARCHAR(45), 
+	artifact_id INTEGER, 
+	target_type VARCHAR(50), 
+	target_id VARCHAR(100), 
+	request_data JSONB, 
+	response_data JSONB, 
+	error_details JSONB, 
+	moodle_api_function VARCHAR(100), 
+	moodle_response_code INTEGER, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)
+)
+
+
+2026-02-06 13:17:14,349 - sqlalchemy.engine.Engine - INFO - [no key 0.00077s] ()
+2026-02-06 13:17:14,471 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_logs_created_at ON audit_logs (created_at)
+2026-02-06 13:17:14,472 - sqlalchemy.engine.Engine - INFO - [no key 0.00083s] ()
+2026-02-06 13:17:14,603 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_actor ON audit_logs (actor_type, actor_id)
+2026-02-06 13:17:14,603 - sqlalchemy.engine.Engine - INFO - [no key 0.00039s] ()
+2026-02-06 13:17:14,741 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_artifact_action ON audit_logs (artifact_id, action)
+2026-02-06 13:17:14,742 - sqlalchemy.engine.Engine - INFO - [no key 0.00063s] ()
+2026-02-06 13:17:14,878 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_logs_action ON audit_logs (action)
+2026-02-06 13:17:14,879 - sqlalchemy.engine.Engine - INFO - [no key 0.00085s] ()
+2026-02-06 13:17:15,004 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE submission_queue (
+	id SERIAL NOT NULL, 
+	artifact_id INTEGER NOT NULL, 
+	status VARCHAR(20), 
+	priority INTEGER, 
+	retry_count INTEGER, 
+	max_retries INTEGER, 
+	next_retry_at TIMESTAMP WITH TIME ZONE, 
+	queued_at TIMESTAMP WITH TIME ZONE DEFAULT now(), 
+	processed_at TIMESTAMP WITH TIME ZONE, 
+	last_error TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)
+)
+
+
+2026-02-06 13:17:15,005 - sqlalchemy.engine.Engine - INFO - [no key 0.00068s] ()
+2026-02-06 13:17:15,167 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_queue_status_retry ON submission_queue (status, next_retry_at)
+2026-02-06 13:17:15,168 - sqlalchemy.engine.Engine - INFO - [no key 0.00122s] ()
+2026-02-06 13:17:15,310 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-06 13:17:15,654 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:15,655 - sqlalchemy.engine.Engine - INFO - SELECT id FROM staff_users WHERE username = 'admin'
+2026-02-06 13:17:15,655 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] ()
+2026-02-06 13:17:16,314 - sqlalchemy.engine.Engine - INFO - INSERT INTO staff_users (username, email, hashed_password, full_name, role, is_active, last_login_at) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::BOOLEAN, $7::TIMESTAMP WITH TIME ZONE) RETURNING staff_users.id, staff_users.created_at
+2026-02-06 13:17:16,314 - sqlalchemy.engine.Engine - INFO - [generated in 0.00047s] ('admin', 'admin@example.com', '$2b$12$gWqGMfXBMvYcRoU6UKjcj.mLhmcLLzyHSjX1vwZgW/f3yzu7diWfa', 'Administrator', 'admin', True, None)
+2026-02-06 13:17:16,440 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-06 13:17:16,722 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:16,722 - sqlalchemy.engine.Engine - INFO - SELECT id FROM subject_mappings WHERE subject_code = $1
+2026-02-06 13:17:16,723 - sqlalchemy.engine.Engine - INFO - [generated in 0.00064s] ('19AI405',)
+2026-02-06 13:17:16,923 - sqlalchemy.engine.Engine - INFO - SELECT id FROM subject_mappings WHERE subject_code = $1
+2026-02-06 13:17:16,923 - sqlalchemy.engine.Engine - INFO - [cached since 0.2007s ago] ('19AI411',)
+2026-02-06 13:17:16,988 - sqlalchemy.engine.Engine - INFO - SELECT id FROM subject_mappings WHERE subject_code = $1
+2026-02-06 13:17:16,989 - sqlalchemy.engine.Engine - INFO - [cached since 0.2665s ago] ('ML',)
+2026-02-06 13:17:17,050 - sqlalchemy.engine.Engine - INFO - INSERT INTO subject_mappings (subject_code, subject_name, moodle_course_id, moodle_course_idnumber, moodle_assignment_id, moodle_assignment_name, exam_session, is_active, updated_at, last_verified_at) SELECT p0::VARCHAR, p1::VARCHAR, p2::INTEGER, p3: ... 735 characters truncated ... sen_counter RETURNING subject_mappings.id, subject_mappings.created_at, subject_mappings.id AS id__1
+2026-02-06 13:17:17,050 - sqlalchemy.engine.Engine - INFO - [generated in 0.00024s (insertmanyvalues) 1/1 (ordered)] ('19AI405', 'Deep Learning', 3, None, 4, None, '2024-1', True, None, None, '19AI411', 'Natural Language Processing', 4, None, 6, None, '2024-1', True, None, None, 'ML', 'Machine Learning', 2, None, 2, None, '2024-1', True, None, None)
+2026-02-06 13:17:17,181 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-06 13:17:17,449 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:17,450 - sqlalchemy.engine.Engine - INFO - SELECT id FROM system_config WHERE key = $1
+2026-02-06 13:17:17,450 - sqlalchemy.engine.Engine - INFO - [generated in 0.00036s] ('moodle_maintenance_mode',)
+2026-02-06 13:17:17,634 - sqlalchemy.engine.Engine - INFO - SELECT id FROM system_config WHERE key = $1
+2026-02-06 13:17:17,635 - sqlalchemy.engine.Engine - INFO - [cached since 0.185s ago] ('max_file_size_mb',)
+2026-02-06 13:17:17,707 - sqlalchemy.engine.Engine - INFO - SELECT id FROM system_config WHERE key = $1
+2026-02-06 13:17:17,708 - sqlalchemy.engine.Engine - INFO - [cached since 0.258s ago] ('allowed_extensions',)
+2026-02-06 13:17:17,799 - sqlalchemy.engine.Engine - INFO - SELECT id FROM system_config WHERE key = $1
+2026-02-06 13:17:17,799 - sqlalchemy.engine.Engine - INFO - [cached since 0.3494s ago] ('exam_session',)
+2026-02-06 13:17:17,871 - sqlalchemy.engine.Engine - INFO - INSERT INTO system_config (key, value, value_type, description, updated_at) SELECT p0::VARCHAR, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::TIMESTAMP WITH TIME ZONE FROM (VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITH T ... 304 characters truncated ...  p2, p3, p4, sen_counter) ORDER BY sen_counter RETURNING system_config.id, system_config.id AS id__1
+2026-02-06 13:17:17,872 - sqlalchemy.engine.Engine - INFO - [generated in 0.00021s (insertmanyvalues) 1/1 (ordered)] ('moodle_maintenance_mode', 'false', 'string', 'Whether Moodle is in maintenance mode', None, 'max_file_size_mb', '50', 'string', 'Maximum file size in MB for uploads', None, 'allowed_extensions', 'pdf,jpg,jpeg,png', 'string', 'Comma-separated list of allowed file extensions', None, 'exam_session', '2024-SPRING', 'string', 'Current examination session', None)
+2026-02-06 13:17:18,025 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-06 13:17:18,267 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:18,267 - sqlalchemy.engine.Engine - INFO - SELECT 1
+2026-02-06 13:17:18,268 - sqlalchemy.engine.Engine - INFO - [generated in 0.00043s] ()
+2026-02-06 13:17:18,466 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-06 13:17:18,708 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-06 13:17:18,708 - sqlalchemy.engine.Engine - INFO - 
+                SELECT table_name 
+                FROM information_schema.tables 
+                WHERE table_schema = 'public'
+            
+2026-02-06 13:17:18,709 - sqlalchemy.engine.Engine - INFO - [generated in 0.00041s] ()
+2026-02-06 13:17:18,928 - sqlalchemy.engine.Engine - INFO - COMMIT
