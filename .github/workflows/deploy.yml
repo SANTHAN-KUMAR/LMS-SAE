@@ -1,0 +1,45 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # 1. Go to app directory and pull latest code
+            cd ~/app
+            git pull origin main
+            
+            # 2. Fix permissions for uploads (just in case)
+            sudo chmod -R 777 uploads
+
+            # 3. Rebuild the Docker Image
+            docker build -t exam-app .
+
+            # 4. Stop and Remove Old Container
+            docker stop exam-server || true
+            docker rm exam-server || true
+
+            # 5. Run New Container (With verified Database Config)
+            docker run -d \
+              --name exam-server \
+              --restart unless-stopped \
+              -p 80:8000 \
+              -v $(pwd)/uploads:/app/uploads \
+              -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
+              -e POSTGRES_HOST='${{ secrets.POSTGRES_HOST }}' \
+              -e POSTGRES_PORT='5432' \
+              -e POSTGRES_USER='${{ secrets.POSTGRES_USER }}' \
+              -e POSTGRES_DB='${{ secrets.POSTGRES_DB }}' \
+              -e ML_SERVICE_ENABLED="false" \
+              exam-app
