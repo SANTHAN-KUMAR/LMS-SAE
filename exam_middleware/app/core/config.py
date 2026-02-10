@@ -80,11 +80,16 @@ class Settings(BaseSettings):
     def database_url_computed(self) -> str:
         """Compute database URL if not provided"""
         if self.database_url:
-            # Ensure we use asyncpg driver
+            # Ensure we use asyncpg driver and strip unsupported params
             try:
                 url_obj = make_url(self.database_url)
                 if url_obj.drivername in ("postgres", "postgresql"):
                     url_obj = url_obj.set(drivername="postgresql+asyncpg")
+                # Strip query params not supported by asyncpg 0.29
+                if url_obj.query:
+                    unsupported = {"channel_binding"}
+                    clean_query = {k: v for k, v in url_obj.query.items() if k not in unsupported}
+                    url_obj = url_obj.set(query=clean_query)
                 return url_obj.render_as_string(hide_password=False)
             except Exception:
                 # Fallback to simple string replacement if parsing fails
