@@ -7,7 +7,7 @@ from typing import List, Optional
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from functools import lru_cache
-import json
+from sqlalchemy.engine.url import make_url
 
 
 class Settings(BaseSettings):
@@ -80,12 +80,20 @@ class Settings(BaseSettings):
         """Compute database URL if not provided"""
         if self.database_url:
             # Ensure we use asyncpg driver
-            url = self.database_url
-            if url.startswith("postgres://"):
-                url = url.replace("postgres://", "postgresql+asyncpg://", 1)
-            elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
-                url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
-            return url
+            try:
+                url_obj = make_url(self.database_url)
+                if url_obj.drivername in ("postgres", "postgresql"):
+                    url_obj = url_obj.set(drivername="postgresql+asyncpg")
+                return url_obj.render_as_string(hide_password=False)
+            except Exception:
+                # Fallback to simple string replacement if parsing fails
+                url = self.database_url
+                if url.startswith("postgres://"):
+                    url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+                elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+                    url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+                return url
+
         return f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
     
     @property
