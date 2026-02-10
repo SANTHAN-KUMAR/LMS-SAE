@@ -55,17 +55,19 @@ async def seed_staff_user():
 
 async def seed_subject_mappings():
     """Seed subject to Moodle assignment mappings."""
-    # Based on the Moodle setup provided:
-    # 19AI405 -> Assignment ID 4 (DEEP LEARNING)
-    # 19AI411 -> Assignment ID 6 (NLP)
-    # ML -> Assignment ID 2 (MACHINE LEARNING)
+    # IMPORTANT: These are assignment INSTANCE IDs, NOT course module IDs (cmid).
+    # cmid is what appears in Moodle URLs (mod/assign/view.php?id=cmid)
+    # instance ID is the actual assignment record ID in mdl_assign table.
+    # 19AI405 -> Course 3, cmid=4, Assignment Instance ID=2
+    # 19AI411 -> Course 4, cmid=6, Assignment Instance ID=3
+    # ML      -> Course 2, cmid=2, Assignment Instance ID=1
     
     mappings = [
         {
             "subject_code": "19AI405",
             "subject_name": "Deep Learning",
             "moodle_course_id": 3,
-            "moodle_assignment_id": 4,
+            "moodle_assignment_id": 2,
             "exam_session": "2024-1",
             "is_active": True,
         },
@@ -73,7 +75,7 @@ async def seed_subject_mappings():
             "subject_code": "19AI411",
             "subject_name": "Natural Language Processing",
             "moodle_course_id": 4,
-            "moodle_assignment_id": 6,
+            "moodle_assignment_id": 3,
             "exam_session": "2024-1",
             "is_active": True,
         },
@@ -81,7 +83,7 @@ async def seed_subject_mappings():
             "subject_code": "ML",
             "subject_name": "Machine Learning",
             "moodle_course_id": 2,
-            "moodle_assignment_id": 2,
+            "moodle_assignment_id": 1,
             "exam_session": "2024-1",
             "is_active": True,
         },
@@ -101,7 +103,21 @@ async def seed_subject_mappings():
                 session.add(subject_mapping)
                 print(f"✓ Created mapping: {mapping['subject_code']} -> Assignment {mapping['moodle_assignment_id']}")
             else:
-                print(f"✓ Mapping already exists: {mapping['subject_code']}")
+                # Update existing mapping with correct values
+                await session.execute(
+                    text("""UPDATE subject_mappings 
+                            SET moodle_assignment_id = :aid, 
+                                moodle_course_id = :cid,
+                                subject_name = :name
+                            WHERE subject_code = :code"""),
+                    {
+                        "aid": mapping["moodle_assignment_id"],
+                        "cid": mapping["moodle_course_id"],
+                        "name": mapping["subject_name"],
+                        "code": mapping["subject_code"],
+                    }
+                )
+                print(f"✓ Updated mapping: {mapping['subject_code']} -> Assignment {mapping['moodle_assignment_id']}")
         
         await session.commit()
 
