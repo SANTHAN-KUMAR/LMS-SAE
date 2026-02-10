@@ -79,7 +79,13 @@ class Settings(BaseSettings):
     def database_url_computed(self) -> str:
         """Compute database URL if not provided"""
         if self.database_url:
-            return self.database_url
+            # Ensure we use asyncpg driver
+            url = self.database_url
+            if url.startswith("postgres://"):
+                url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+            elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+                url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+            return url
         return f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
     
     @property
