@@ -1,45 +1,82 @@
-name: Deploy to AWS EC2
+# ================================================
+# CD Pipeline — Deploy to Render
+# ================================================
+# Triggers a deploy on Render after CI passes.
+# Render builds the Docker image from this repo
+# and deploys it automatically.
+#
+# Required GitHub Secrets:
+#   - RENDER_DEPLOY_HOOK_URL : Render Deploy Hook URL
+#     (Get it from: Render Dashboard → Your Service
+#      → Settings → Deploy Hook)
+#
+# How Render Deploy Works:
+#   1. This workflow hits the Render Deploy Hook URL
+#   2. Render pulls the latest code from the repo
+#   3. Render builds the Docker image using Dockerfile
+#   4. Render deploys the new container
+#   5. Health checks verify the deployment
+#
+# Environment variables (DATABASE_URL, SECRET_KEY,
+# MOODLE_BASE_URL, etc.) are configured directly
+# in the Render dashboard, NOT in this file.
+# ================================================
+
+name: Deploy to Render
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
+  # Allow manual deployment from GitHub Actions tab
+  workflow_dispatch:
 
 jobs:
+  # ────────────────────────────────────────────────
+  # Job 1: Run CI first (reuse the CI workflow)
+  # ────────────────────────────────────────────────
+  ci:
+    name: ✅ Run CI Checks
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  # ────────────────────────────────────────────────
+  # Job 2: Deploy to Render (only after CI passes)
+  # ────────────────────────────────────────────────
   deploy:
+    name: 🚀 Deploy to Render
     runs-on: ubuntu-latest
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: production
+      url: https://lms-sae.onrender.com
+
     steps:
-      - name: Deploy to Server via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            # 1. Go to app directory and pull latest code
-            cd ~/app
-            git pull origin main
-            
-            # 2. Fix permissions for uploads (just in case)
-            sudo chmod -R 777 uploads
+      - name: Trigger Render Deploy
+        run: |
+          echo "🚀 Triggering deploy on Render..."
+          RESPONSE=$(curl -sf -o /dev/null -w "%{http_code}" \
+            "${{ secrets.RENDER_DEPLOY_HOOK_URL }}")
 
-            # 3. Rebuild the Docker Image
-            docker build -t exam-app .
+          if [ "$RESPONSE" = "200" ] || [ "$RESPONSE" = "201" ]; then
+            echo "✅ Deploy triggered successfully (HTTP $RESPONSE)"
+            echo ""
+            echo "📋 Render will now:"
+            echo "   1. Pull latest code from main branch"
+            echo "   2. Build Docker image"
+            echo "   3. Deploy new container"
+            echo "   4. Run health checks"
+            echo ""
+            echo "🔗 Monitor at: https://dashboard.render.com"
+          else
+            echo "❌ Failed to trigger deploy (HTTP $RESPONSE)"
+            exit 1
+          fi
 
-            # 4. Stop and Remove Old Container
-            docker stop exam-server || true
-            docker rm exam-server || true
-
-            # 5. Run New Container (With verified Database Config)
-            docker run -d \
-              --name exam-server \
-              --restart unless-stopped \
-              -p 80:8000 \
-              -v $(pwd)/uploads:/app/uploads \
-              -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
-              -e POSTGRES_HOST='${{ secrets.POSTGRES_HOST }}' \
-              -e POSTGRES_PORT='5432' \
-              -e POSTGRES_USER='${{ secrets.POSTGRES_USER }}' \
-              -e POSTGRES_DB='${{ secrets.POSTGRES_DB }}' \
-              -e ML_SERVICE_ENABLED="false" \
-              exam-app
+      - name: Wait for deployment
+        run: |
+          echo "⏳ Waiting 60s for Render to start building..."
+          sleep 60
+          echo "✅ Deploy should be in progress on Render."
+          echo "   Check https://dashboard.render.com for status."
